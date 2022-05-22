@@ -35,5 +35,19 @@ Route::middleware('user')->group(function () {
 // })->name('admin');
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
+    Route::redirect('/', '/dashboard');
     Route::get('/dashboard', [AdminController::class, 'home'])->name('admin.dashboard');
+
+    //ROle Management
+    Route::get('/role', [AdminController::class, 'role_index'])->name('admin.role.index');
+    Route::view('/role/create', 'admin.role.create')->name('admin.role.create');
+    Route::post('/role', [AdminController::class, 'role_store'])->name('admin.role.store');
+    Route::get('/role/{id}/edit', [AdminController::class, 'role_edit'])->name('admin.role.edit');
+    Route::put('/role/{id}', [AdminController::class, 'role_update'])->name('admin.role.update');
+
+    //User Management
+    Route::get('/user', [AdminController::class, 'user_index'])->name('admin.user.index');
+    Route::get('/user/create', [AdminController::class, 'user_create'])->name('admin.user.create');
+    Route::post('/user', [AdminController::class, 'user_store'])->name('admin.user.store');
+    Route::delete('user/{id}', [AdminController::class, 'user_destroy'])->name('admin.user.destroy');
 });

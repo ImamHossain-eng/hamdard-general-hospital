@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if(auth()->check()){
-            if(auth()->user()->role == 'admin'){
+            if(auth()->user()->role_id == 1){
                 return $next($request);
             }else{
                 return back()->with('error', 'You are not admin.');

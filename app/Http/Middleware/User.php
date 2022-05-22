@@ -17,7 +17,7 @@ class User
     public function handle(Request $request, Closure $next)
     {
         if(auth()->check()){
-            if(auth()->user()->role == 'user'){
+            if(auth()->user()->role_id == 2){
                 return $next($request);
             }else{
                 return back()->with('error', 'You are not user.');

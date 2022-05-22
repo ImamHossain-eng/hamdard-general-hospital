@@ -51,10 +51,10 @@ class LoginController extends Controller
    
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            if (auth()->user()->role == 'user') {
+            if (auth()->user()->role_id == 2) {
                 return redirect()->route('home');
             }else{
-                return redirect()->route('admin');
+                return redirect()->route('admin.dashboard');
             }
         }else{
             return redirect()->route('login')

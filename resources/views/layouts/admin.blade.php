@@ -15,9 +15,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet"> --}}
 
     <!-- Custom styles for this template-->
     <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
@@ -33,7 +32,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/dashboard">
                 <div class="sidebar-brand-icon" title="Hamdard General Hospital">
                     <img src="{{asset('images/logo/clinic.png')}}" style="width:50px;" alt="">
                     {{-- <i class="fas fa-laugh-wink"></i> --}}
@@ -59,7 +58,7 @@
                 User Management
             </div>
 
-            <li class="nav-item">
+            <li class="nav-item  @if(request()->routeIs('admin.role*') || request()->routeIs('admin.user*')) active @endif">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user"
                     aria-expanded="true" aria-controls="user">
                     <i class="fas fa-fw fa-users"></i>
@@ -68,8 +67,8 @@
                 <div id="user" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">User Management</h6>
-                        <a class="collapse-item" href="#">Roles</a>
-                        <a class="collapse-item" href="#">Users</a>
+                        <a class="collapse-item" href="/admin/role">Roles</a>
+                        <a class="collapse-item" href="/admin/user">Users</a>
                     </div>
                 </div>
             </li>
@@ -434,7 +433,10 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form action="{{route('logout')}}" method="POST">
+                        @csrf 
+                        <button type="submit" class="btn btn-primary">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
