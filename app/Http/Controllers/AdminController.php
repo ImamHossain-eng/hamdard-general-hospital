@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
 
+use Carbon\Carbon;
+
 class AdminController extends Controller
 {
+    public function changeUser($id) {
+        $user = User::find($id);
+        $user->active = true;
+        $user->last_login = Carbon::now();
+        $user->save();
+    }
     public function home(){
+        // $this->changeUser(auth()->user()->id);
         return view('admin.home');
     }
     public function role_index(){
@@ -63,5 +72,33 @@ class AdminController extends Controller
     public function user_destroy($id){
         User::find($id)->delete();
         return redirect()->route('admin.user.index')->with('error', 'Successfully Removed.');
+    }
+    public function user_edit($id){
+        $user = User::find($id);
+        $roles = Role::all();
+        return view('admin.user.edit', compact('user', 'roles'));
+    }
+    public function user_update(Request $request, $id){
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|email'
+        ]);
+
+        $user = User::find($id);
+        $oldPass = $user->password;
+
+        if($request->input('password') != null){
+            $password = bcrypt($request->input('password'));
+        }else{
+            $password = $oldPass;
+        }
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $password;
+        $user->role_id = $request->input('role_id');
+        $user->save();
+
+        return redirect()->route('admin.user.index')->with('warning', 'Successfully Updated.');
     }
 }

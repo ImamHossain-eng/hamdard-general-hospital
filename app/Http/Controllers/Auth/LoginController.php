@@ -39,7 +39,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-
     public function login(Request $request)
     {   
         $input = $request->all();
@@ -59,7 +58,6 @@ class LoginController extends Controller
         }else{
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
-        }
-          
+        }   
     }
 }

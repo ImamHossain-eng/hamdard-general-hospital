@@ -384,14 +384,8 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-
+                    @include('inc.message')
                     @yield('content')
-
-                    
-
-
-
                 </div>
                 <!-- /.container-fluid -->
 
