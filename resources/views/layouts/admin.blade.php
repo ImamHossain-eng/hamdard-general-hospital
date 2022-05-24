@@ -78,6 +78,29 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
+                Resources
+            </div>
+
+            <li class="nav-item  @if(request()->routeIs('admin.role*') || request()->routeIs('admin.user*')) active @endif">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#resource"
+                    aria-expanded="true" aria-controls="resource">
+                    <i class="fas fa-fw fa-database"></i>
+                    <span>DB Resources</span>
+                </a>
+                <div id="resource" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Resource Management</h6>
+                        <a class="collapse-item" href="/admin/messages">Messages/Feedback</a>
+                        <a class="collapse-item" href="#">Users</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
                 Interface
             </div>
 

@@ -19,7 +19,7 @@
         </a>
     </div>
     <nav class="sidebar-nav">
-        @include('layouts.navigation')
+        @include('doctor.inc.navigation')
     </nav>
 </aside>
 <div class="overlay"></div>
@@ -103,7 +103,7 @@
                                     href="#"
                                     
                             >
-                                Toma
+                                Admin
                             </a>
                         </p>
                     </div>

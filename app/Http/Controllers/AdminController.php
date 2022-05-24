@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Message;
 
 use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    public function changeUser($id) {
+    public function changeUserLoginDate($id) {
         $user = User::find($id);
-        $user->active = true;
         $user->last_login = Carbon::now();
         $user->save();
     }
     public function home(){
-        // $this->changeUser(auth()->user()->id);
+        $this->changeUserLoginDate(auth()->user()->id);
         return view('admin.home');
     }
     public function role_index(){
@@ -100,5 +100,21 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->route('admin.user.index')->with('warning', 'Successfully Updated.');
+    }
+    public function message_index() {
+        $messages = Message::latest()->paginate(10);
+        return view('admin.message.index', compact('messages'));        
+    }
+    public function message_show($id) {
+        $message = Message::find($id);
+        if($message->seen != true){
+            $message->seen = true;
+            $message->save();
+        }
+        return view('admin.message.show', compact('message'));
+    }
+    public function message_destroy($id) {
+        Message::find($id)->delete();
+        return redirect()->route('admin.message.index')->with('error', 'Successfully removed.');       
     }
 }

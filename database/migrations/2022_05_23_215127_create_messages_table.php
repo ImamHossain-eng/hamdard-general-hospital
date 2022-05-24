@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->string('email');
             $table->integer('mobile')->nullable();
             $table->mediumText('body');
+            $table->boolean('seen')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

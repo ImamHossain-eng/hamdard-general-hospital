@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\DoctorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,7 @@ Route::post('/', [PagesController::class, 'contact'])->name('contact');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 
 Route::middleware('user')->group(function () {
     Route::view('about', 'about')->name('about')->middleware('auth');
@@ -32,9 +33,9 @@ Route::middleware('user')->group(function () {
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
 
-// Route::get('/admin', function(){
-//     return 'admin';
-// })->name('admin');
+Route::prefix('doctor')->middleware('doctor')->group(function () {
+    Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
+});
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::redirect('/', '/dashboard');
@@ -54,4 +55,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::delete('user/{id}', [AdminController::class, 'user_destroy'])->name('admin.user.destroy');
     Route::get('user/{id}/edit', [AdminController::class, 'user_edit'])->name('admin.user.edit');
     Route::put('user/{id}', [AdminController::class, 'user_update'])->name('admin.user.update');
+
+    //Message
+    Route::get('/messages', [AdminController::class, 'message_index'])->name('admin.message.index');
+    Route::get('/messages/{id}', [AdminController::class, 'message_show'])->name('admin.message.show');
+    Route::delete('/messages/{id}', [AdminController::class, 'message_destroy'])->name('admin.message.destroy');
 });

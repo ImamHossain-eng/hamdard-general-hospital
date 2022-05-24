@@ -20,10 +20,24 @@
           <li><a href="#4"><img src="{{asset('homepage/assets/images/icon-4.png')}}" alt=""> <em>Contact Us</em></a></li>
         </ul>
       </nav>
-      
+
       <div class="slides">
+
+        
+
         <div class="slide" id="1">
           <div id="slider-wrapper">
+
+            <!--Login Section start from here-->
+        <div class="row bg-dark w-100" style="">
+          <div class="" style="margin-left: 15em;">
+            <a href="/login" class="p-2 btn btn-primary">Login</a>
+            <a href="/register" class="p-2 btn btn-success">Register</a>
+                        
+          </div>
+        </div>
+       
+        <!--Login Section end from here-->
             
               <div id="image-slider">
                 <ul>
