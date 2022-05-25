@@ -35,6 +35,10 @@ Route::middleware('user')->group(function () {
 
 Route::prefix('doctor')->middleware('doctor')->group(function () {
     Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
+
+    //my profile
+    Route::get('/profile', [DoctorController::class, 'my_profile'])->name('doctor.profile');
+    Route::post('/profile', [DoctorController::class, 'my_profile_update'])->name('doctor.profile.update');
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {

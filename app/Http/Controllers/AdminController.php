@@ -63,6 +63,7 @@ class AdminController extends Controller
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = bcrypt($request->input('password'));
+            $user->role_id = $request->input('role_id');
             $user->save();
             return redirect()->route('admin.user.index')->with('success', 'Successfully Inserted.');
         }else{

@@ -4,11 +4,15 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Hamdard General Hospital</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo/hgh_logo.jpg')}}">
+
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!-- ======== sidebar-nav start =========== -->
@@ -121,5 +125,10 @@
 <!-- ========= All Javascript files linkup ======== -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replaceAll( function( textarea, config ) {            
+        });
+</script>
 </body>
 </html>

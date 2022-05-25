@@ -1,6 +1,6 @@
 <ul>
-    <li class="nav-item @if(request()->routeIs('home')) active @endif">
-        <a href="{{ route('home') }}">
+    <li class="nav-item @if(request()->routeIs('doctor.dashboard')) active @endif">
+        <a href="{{ route('doctor.dashboard') }}">
               <span class="icon">
                 <svg width="22" height="22" viewBox="0 0 22 22">
                   <path
@@ -9,6 +9,15 @@
                 </svg>
               </span>
             <span class="text">{{ __('Dashboard') }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item @if(request()->routeIs('doctor.profile')) active @endif">
+        <a href="{{ route('doctor.profile') }}">
+              <span class="icon">
+                <i class="fa fa-user-md"></i>
+              </span>
+            <span class="text">{{ __('My Profile') }}</span>
         </a>
     </li>
 
