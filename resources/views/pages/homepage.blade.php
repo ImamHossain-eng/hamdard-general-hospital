@@ -29,8 +29,8 @@
           <div id="slider-wrapper">
 
             <!--Login Section start from here-->
-        <div class="row bg-dark w-100" style="">
-          <div class="" style="margin-left: 15em;">
+        <div class="row bg-dark pt-2 pb-2" style="">
+          <div class="" style="margin-left: 20em;">
             <a href="/login" class="p-2 btn btn-primary">Login</a>
             <a href="/register" class="p-2 btn btn-success">Register</a>
                         
@@ -121,114 +121,27 @@
               <div class="container-fluid">
                   <div class="row">
                       <div class="owl-carousel owl-theme">
+
+                        @foreach($doctors as $doc)
                           <div class="col-md-12">
                               <div class="featured-item"> 
-                                  <a href=""><img src="{{asset('homepage/assets/images/item-01.jpg')}}" alt=""></a>
+                                  <a href="/doctor/{{$doc->id}}">
+                                    @if($doc->user->image == null)
+                                            <img src="{{asset('admin/img/undraw_profile.svg')}}" class="rounded" alt="">
+                                        @else 
+                                            <img src="{{asset('images/user/'.$doc->user->image)}}" class="rounded" alt="">
+                                        @endif
+                                    {{-- <img src="{{asset('homepage/assets/images/item-01.jpg')}}" alt=""> --}}
+                                  </a>
                                   <div class="down-content">
-                                  <h4>Donec non sagittis</h4>
-                                      <h6>$25.00</h6>
+                                    <h4>{{Str::limit($doc->speciality, 14, $end='...')}}</h4>
+                                    <h6>{{$doc->user->name}}</h6>
+                                      <hr>
+                                      <h6>{{$doc->degree}}</h6>
                                   </div>
                               </div>
                           </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <a href=""><img src="{{asset('homepage/assets/images/item-02.jpg')}}" alt=""></a>
-                                  <div class="down-content">
-                                      <h4>Nulla a pharetra</h4>
-                                      <h6>$35.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-03.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Aliquam convallis</h4>
-                                      <h6>$45.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-04.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Vivamus vitae #4</h4>
-                                      <h6>$55.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-05.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Vivamus vitae #6</h4>
-                                      <h6>$65.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-06.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Vivamus vitae #8</h4>
-                                      <h6>$75.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-07.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Donec non sagittis</h4>
-                                      <h6>$85.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-08.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Curabitur sed 8</h4>
-                                      <h6>$95.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-09.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Curabitur sed 10</h4>
-                                      <h6>$105.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-10.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Curabitur sed 12</h4>
-                                      <h6>$115.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-11.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Curabitur sed 14</h4>
-                                      <h6>$125.00</h6>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="featured-item">
-                                  <img src="{{asset('homepage/assets/images/item-12.jpg')}}" alt="">
-                                  <div class="down-content">
-                                      <h4>Curabitur sed 16</h4>
-                                      <h6>$135.00</h6>
-                                  </div>
-                              </div>
-                          </div>
+                          @endforeach
                       </div>
                   </div>
               </div>

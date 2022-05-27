@@ -15,10 +15,11 @@ use App\Http\Controllers\DoctorController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.homepage');
-})->name('homepage');
+Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
+
 Route::post('/', [PagesController::class, 'contact'])->name('contact');
+
+Route::get('/doctor/{id}', [PagesController::class, 'doctor_profile'])->name('doctor_profile');
 
 Auth::routes();
 
@@ -39,6 +40,10 @@ Route::prefix('doctor')->middleware('doctor')->group(function () {
     //my profile
     Route::get('/profile', [DoctorController::class, 'my_profile'])->name('doctor.profile');
     Route::post('/profile', [DoctorController::class, 'my_profile_update'])->name('doctor.profile.update');
+    
+    //User Profile
+    Route::get('/auth_profile', [DoctorController::class, 'auth_profile'])->name('doctor.auth.profile');
+    Route::put('/auth_profile', [DoctorController::class, 'auth_profile_update'])->name('doctor.auth.update');
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {

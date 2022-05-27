@@ -5,6 +5,7 @@
         <div class="card-title">
             <h3 class="text-center">My Profile Info</h3>
         </div>
+        <a href="/doctor/auth_profile" class="btn btn-primary" title="Edit auth profile">Edit Authentication Info</a>
     </div>
     <div class="card-body">
         <form action="{{route('doctor.profile.update')}}" method="POST">
