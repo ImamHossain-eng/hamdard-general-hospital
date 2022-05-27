@@ -19,7 +19,7 @@ Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
 Route::post('/', [PagesController::class, 'contact'])->name('contact');
 
-Route::get('/doctor/{id}', [PagesController::class, 'doctor_profile'])->name('doctor_profile');
+Route::get('/doctor_profile/{id}', [PagesController::class, 'doctor_profile'])->name('doctor_profile');
 
 Auth::routes();
 

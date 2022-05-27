@@ -31,9 +31,18 @@
             <!--Login Section start from here-->
         <div class="row bg-dark pt-2 pb-2" style="">
           <div class="" style="margin-left: 20em;">
+            @if(auth()->check())
+            @if(auth()->user()->role_id == 1)
+              <a href="/admin/dashboard" class="p-2 btn btn-warning">Admin Dashboard</a>
+              @elseif(auth()->user()->role_id == 3)
+              <a href="/doctor/dashboard" class="p-2 btn btn-warning">Doctor Dashboard</a>
+              @else
+              <a href="/home" class="p-2 btn btn-warning">Dashboard</a>
+            @endif
+            @else
             <a href="/login" class="p-2 btn btn-primary">Login</a>
             <a href="/register" class="p-2 btn btn-success">Register</a>
-                        
+            @endif             
           </div>
         </div>
        
@@ -125,7 +134,7 @@
                         @foreach($doctors as $doc)
                           <div class="col-md-12">
                               <div class="featured-item"> 
-                                  <a href="/doctor/{{$doc->id}}">
+                                  <a href="/doctor_profile/{{$doc->id}}">
                                     @if($doc->user->image == null)
                                             <img src="{{asset('admin/img/undraw_profile.svg')}}" class="rounded" alt="">
                                         @else 
