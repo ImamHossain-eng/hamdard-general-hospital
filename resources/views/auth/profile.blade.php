@@ -30,11 +30,29 @@
                     </div>
                 @endif
 
-                <form action="{{ route('profile.update') }}" method="POST">
+                <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <div class="row">
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label for="image">Profile Picture</label>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        @if(auth()->user()->image == null)
+                                            <img src="{{asset('admin/img/undraw_profile.svg')}}" class="rounded w-75" alt="">
+                                        @else 
+                                            <img src="{{asset('images/user/'.auth()->user()->image)}}" class="rounded w-75" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6"><br>
+                                        {{-- <a href="" class="btn btn-primary mt-4">Upload Profile Picture</a> --}}
+                                        <input type="file" name="image" class="btn btn-primary mt-4" placeholder="Upload Profile Picture">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="input-style-1">
                                 <label for="name">{{ __('Name') }}</label>
@@ -68,7 +86,7 @@
                                 <label for="password">{{ __('New password') }}</label>
                                 <input type="password" @error('password') class="form-control is-invalid"
                                        @enderror name="password" id="password" placeholder="{{ __('New password') }}"
-                                       required>
+                                       >
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -82,7 +100,7 @@
                                 <label for="password_confirmation">{{ __('New password confirmation') }}</label>
                                 <input type="password" @error('password') class="form-control is-invalid"
                                        @enderror name="password_confirmation" id="password_confirmation"
-                                       placeholder="{{ __('New password confirmation') }}" required>
+                                       placeholder="{{ __('New password confirmation') }}">
                             </div>
                         </div>
                         <!-- end col -->
