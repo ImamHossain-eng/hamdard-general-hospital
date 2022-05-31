@@ -18,9 +18,9 @@
 <!-- ======== sidebar-nav start =========== -->
 <aside class="sidebar-nav-wrapper">
     <div class="navbar-logo">
-        <a href="{{ route('home') }}">
-            <img src="{{ asset('images/logo/logo.svg') }}" alt="logo"/>
-        </a>
+        <a href="{{ route('doctor.dashboard') }}">
+            <img src="{{ asset('images/logo/hgh_logo.jpg') }}" alt="logo" class="img img-thumbnail w-50"/>
+        </a> 
     </div>
     <nav class="sidebar-nav">
         @include('doctor.inc.navigation')

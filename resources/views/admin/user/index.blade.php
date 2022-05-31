@@ -28,6 +28,7 @@
                         <td>{{$user->role->name}}</td>
                         <td>{{$user->created_at->diffForHumans()}}</td>
                         <td>
+                            @if(auth()->user()->id != $user->id)
                             <a href="/admin/user/{{$user->id}}/edit" title="Edit this user" class="btn btn-success">
                                 <i class="fa fa-check"></i>
                             </a>
@@ -38,6 +39,8 @@
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </form>
+                            @endif
+
                         </td>
                     </tr>
                 @empty 

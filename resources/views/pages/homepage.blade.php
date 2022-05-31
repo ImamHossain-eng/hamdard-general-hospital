@@ -52,29 +52,29 @@
                 <ul>
                   <li class="active-img">
                     <div class="slide-caption">
-                      <h6>New Arrival</h6>
-                      <h2>Beautiful<br>Earth</h2>
+                      <h6>World Class</h6>
+                      <h2>Expert <br>Doctors</h2>
                     </div>
                   </li>
                   <li>
                     <div class="slide-caption">
-                      <h6>Latest One</h6>
-                      <h2>Tech<br>Meeting</h2>
+                      <h6>Anytime</h6>
+                      <h2>24/7<br>Support</h2>
                     </div>
                   </li>
                   <li>
                     <div class="slide-caption">
-                      <h6>Your Update</h6>
-                      <h2>Smart<br>Devices</h2>
+                      <h6>Update Devices and technologies</h6>
+                      <h2>Modern<br>Laboratories</h2>
                     </div>
                   </li>                      
                 </ul>
               </div>
               <div id="thumbnail">
                 <ul>
-                  <li class="active"><img src="{{asset('homepage/assets/images/thumb-01.jpg')}}" alt="Earth" /></li>
-                  <li><img src="{{asset('homepage/assets/images/thumb-02.jpg')}}" alt="Meeting" /></li>
-                  <li><img src="{{asset('homepage/assets/images/thumb-03.jpg')}}" alt="Smart" /></li>         
+                  <li class="active"><img src="{{asset('homepage/assets/images/full-bg-01.jpg')}}" alt="Earth" /></li>
+                  <li><img src="{{asset('homepage/assets/images/full-bg-02.jpg')}}" alt="Meeting" /></li>
+                  <li><img src="{{asset('homepage/assets/images/full-bg-03.jpg')}}" alt="Smart" /></li>         
                 </ul>
               </div>
             </div>
@@ -104,9 +104,7 @@
                     <h2>Do you need any medical service or support?</h2>
                     <span>Just create an account and login to your dashboard.</span>
                     <p>If you don't have an account then <a href="/register">Sign Up</a> and enjoy our online medical services. You also can live chat with our professional doctors.</p>
-                    <p>
-                        <a href="/login" class="btn btn-primary">Sign In</a>
-                    </p>
+                  
 
                     
                   </article>

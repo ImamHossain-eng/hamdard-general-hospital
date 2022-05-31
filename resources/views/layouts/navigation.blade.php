@@ -12,6 +12,15 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a href="{{ route('homepage') }}">
+              <span class="icon">
+                <i class="fa fa-home"></i>
+              </span>
+            <span class="text">Homepage</span>
+        </a>
+    </li>
+
    
 
     <li class="nav-item @if(request()->routeIs('about')) active @endif">
