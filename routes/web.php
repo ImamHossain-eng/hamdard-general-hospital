@@ -21,6 +21,7 @@ Route::post('/', [PagesController::class, 'contact'])->name('contact');
 
 Route::get('/doctor_profile/{id}', [PagesController::class, 'doctor_profile'])->name('doctor_profile');
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
@@ -67,4 +68,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::get('/messages', [AdminController::class, 'message_index'])->name('admin.message.index');
     Route::get('/messages/{id}', [AdminController::class, 'message_show'])->name('admin.message.show');
     Route::delete('/messages/{id}', [AdminController::class, 'message_destroy'])->name('admin.message.destroy');
+
+    //Doctor Function
+    Route::get('/speciality', [AdminController::class, 'speciality_index'])->name('admin.speciality.index');
+    Route::view('/speciality/create', 'admin.special.create')->name('admin.speciality.create');
+    Route::post('/speciality', [AdminController::class, 'speciality_store'])->name('admin.speciality.store');
 });

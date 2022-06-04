@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2022 at 11:55 AM
+-- Generation Time: May 31, 2022 at 06:13 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -85,7 +85,8 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `name`, `email`, `mobile`, `body`, `seen`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Nomlanga Bullock', 'cigo@mailinator.com', 50, 'Dolor voluptate quia', 1, '2022-05-24 16:26:52', '2022-05-24 16:13:26', '2022-05-24 16:26:52');
+(1, 'Nomlanga Bullock', 'cigo@mailinator.com', 50, 'Dolor voluptate quia', 1, '2022-05-24 16:26:52', '2022-05-24 16:13:26', '2022-05-24 16:26:52'),
+(2, 'Kiayada Hopkins', 'gimoxyduwy@mailinator.com', 73, 'Delectus et consequ', 0, NULL, '2022-05-31 14:58:37', '2022-05-31 14:58:37');
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2014_10_12_000000_create_users_table', 5),
 (10, '2022_05_23_215127_create_messages_table', 6),
 (11, '2022_05_24_223028_add_image_to_users_table', 7),
-(12, '2022_05_25_221306_create_doctors_table', 8);
+(12, '2022_05_25_221306_create_doctors_table', 8),
+(13, '2022_05_31_215755_create_specials_table', 9);
 
 -- --------------------------------------------------------
 
@@ -171,6 +173,21 @@ INSERT INTO `roles` (`id`, `name`, `status`, `deleted_at`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `specials`
+--
+
+CREATE TABLE `specials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `speciality` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` int(11) NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -194,10 +211,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `active`, `last_login`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-05-27 23:08:33', NULL, '2022-05-23 16:42:52', '2022-05-27 17:08:33', NULL),
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-05-31 22:04:21', NULL, '2022-05-23 16:42:52', '2022-05-31 16:04:21', NULL),
 (2, 'Dr. Kazmi', 'kazmi@gmail.com', NULL, '$2y$10$DknRb4YQWk03XeeoYjbKweq5clVy8k38xzxnBI/aCVfrO2zx.YpE6', 3, 0, NULL, NULL, '2022-05-24 16:36:13', '2022-05-26 16:41:18', '1653583278.jpg'),
 (3, 'Dr. Khairul Alam', 'khairul@gmail.com', NULL, '$2y$10$yr1STqNNCYbWjnIvGuSs3.dbvyv2o.s0JBHY80lyNbFjQaR5fgACe', 3, 0, NULL, NULL, '2022-05-27 17:09:04', '2022-05-27 17:14:15', '1653671655.png'),
-(4, 'Toma Akter', 'toma@gmail.com', NULL, '$2y$10$eLfI3ucexAJfxNF6afEBi.c0wtv7Ppe7S9d6xJONOkoT8sxPzjad.', 2, 0, NULL, NULL, '2022-05-29 14:33:04', '2022-05-29 14:48:11', '1653835691.png');
+(4, 'Toma Akter', 'toma@gmail.com', NULL, '$2y$10$eLfI3ucexAJfxNF6afEBi.c0wtv7Ppe7S9d6xJONOkoT8sxPzjad.', 2, 0, NULL, NULL, '2022-05-29 14:33:04', '2022-05-29 14:48:11', '1653835691.png'),
+(5, 'User', 'user@gmail.com', NULL, '$2y$10$2uGHTChco6.bBL4fMRoNPOeUkNRDL8EbtxZAVgWPaHGzx6k.iTzwq', 2, 0, NULL, NULL, '2022-05-31 15:06:30', '2022-05-31 15:06:30', NULL);
 
 --
 -- Indexes for dumped tables
@@ -249,6 +267,12 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `specials`
+--
+ALTER TABLE `specials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -275,13 +299,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -296,10 +320,16 @@ ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `specials`
+--
+ALTER TABLE `specials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

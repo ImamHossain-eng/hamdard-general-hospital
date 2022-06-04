@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Message;
+use App\Models\Special;
 
 use Carbon\Carbon;
 
@@ -117,5 +118,20 @@ class AdminController extends Controller
     public function message_destroy($id) {
         Message::find($id)->delete();
         return redirect()->route('admin.message.index')->with('error', 'Successfully removed.');       
+    }
+    public function speciality_index(){
+        $specials = Special::all();
+        return view('admin.special.index', compact('specials'));
+    }
+    public function speciality_store(Request $request){
+        $this->validate($request, [
+            'speciality' => 'required|string|max:191'
+        ]);
+        $getMaxPos = Special::max('position');
+        $special = new Special;
+        $special->speciality = $request->input('speciality');
+        $special->position = $getMaxPos+1;
+        $special->save();
+        return redirect()->route('admin.speciality.index')->with('success', 'Successfully Created');
     }
 }
