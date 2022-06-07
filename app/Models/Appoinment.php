@@ -6,23 +6,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Special extends Model
+class Appoinment extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'speciality',
-        'position'
+        'user_id',
+        'doctor_id',
+        'date',
+        'prescription'
     ];
 
     protected $dates = [
+        'date',
         'deleted_at',
         'created_at',
         'updated_at'
     ];
 
-    public function doctors(){
-        return $this->hasMany(Doctor::class);
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function doctor(){
+        return $this->belongsTo(Doctor::class);
     }
 
 }

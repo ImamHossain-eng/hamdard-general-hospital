@@ -12,6 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Font Awesome-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    @livewireStyles
 </head>
 <body>
 <!-- ======== sidebar-nav start =========== -->
@@ -129,5 +130,6 @@
     CKEDITOR.replaceAll( function( textarea, config ) {            
         });
 </script>
+@livewireScripts
 </body>
 </html>

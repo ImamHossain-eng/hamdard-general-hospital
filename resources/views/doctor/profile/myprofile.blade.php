@@ -14,7 +14,13 @@
                 <input type="text" name="name" value="{{auth()->user()->name}}" placeholder="Your Name" class="form-control" disabled>
             </div>
             <div class="form-group mb-3">
-                <input type="text" name="speciality" value="{{auth()->user()->doctor ? auth()->user()->doctor->speciality : ''}}" placeholder="Your Speciality" class="form-control">
+                <select name="special_id" class="form-control">
+                    <option value="">Choose your speciality...</option>
+                    @php($specials = Special::all())
+                    @foreach($specials as $special)
+                        <option value="{{$special->id}}">{{$special->speciality}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group mb-3">
                 <input type="text" name="degree" value="{{auth()->user()->doctor ? auth()->user()->doctor->degree : ''}}" placeholder="Your Degree" class="form-control">

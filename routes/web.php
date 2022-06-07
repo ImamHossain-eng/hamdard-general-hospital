@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,11 @@ Route::middleware('user')->group(function () {
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
+    //Appointment
+    Route::get('/appointment', [UserController::class, 'user_appointment'])->name('user.appointment.index');
+    Route::get('/appointment/new', [UserController::class, 'user_appointment_create'])->name('user.appointment.create');
+
 });
 
 Route::prefix('doctor')->middleware('doctor')->group(function () {
@@ -57,7 +63,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::put('/role/{id}', [AdminController::class, 'role_update'])->name('admin.role.update');
 
     //User Management
-    Route::get('/user', [AdminController::class, 'user_index'])->name('admin.user.index');
+    Route::get('/user/{role_id}', [AdminController::class, 'user_index'])->name('admin.user.index');
     Route::get('/user/create', [AdminController::class, 'user_create'])->name('admin.user.create');
     Route::post('/user', [AdminController::class, 'user_store'])->name('admin.user.store');
     Route::delete('user/{id}', [AdminController::class, 'user_destroy'])->name('admin.user.destroy');
@@ -73,4 +79,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::get('/speciality', [AdminController::class, 'speciality_index'])->name('admin.speciality.index');
     Route::view('/speciality/create', 'admin.special.create')->name('admin.speciality.create');
     Route::post('/speciality', [AdminController::class, 'speciality_store'])->name('admin.speciality.store');
+
+    Route::get('/doctors', [AdminController::class, 'doctor_index'])->name('admin.doctor.index');
+    Route::get('/doctors/{id}', [AdminController::class, 'doctor_show'])->name('admin.doctor.show');
 });

@@ -3,8 +3,7 @@
 <div class="card">
     <div class="card-header">
         <div class="card-title">
-            <h3 class="text-center">All Doctors' Category</h3>
-            <a href="/admin/speciality/create" title="Insert a new user role" class="btn btn-primary">Add New Category</a>
+            <h3 class="text-center">All Doctors</h3>
         </div>
     </div>
     <div class="card-body">
@@ -12,24 +11,24 @@
             <thead>
                 <tr>
                     <th>Serial</th>
-                    <th>DB ID</th>
-                    <th>Category/Speciality</th>
-                    <th>No of Doctors</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Speciality</th>
                     <th>Created at</th>
                     <th>Option</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($specials as $key => $special)
+                @forelse($doctors as $key => $doctor)
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{$special->id}}</td>
-                        <td>{{$special->speciality}}</td>
-                        <td>{{$special->doctors->count()}}</td>
-                        <td>{{$special->created_at->diffForHumans()}}</td>
+                        <td>{{$doctor->user->name}}</td>
+                        <td>{{$doctor->user->email}}</td>
+                        <td>{{$doctor->special->speciality}}</td>
+                        <td>{{$doctor->created_at->diffForHumans()}}</td>
                         <td>
-                            <a href="/admin/speciality/{{$special->id}}/edit" title="Edit this role title" class="btn btn-success">
-                                <i class="fa fa-check"></i>
+                            <a href="/admin/doctors/{{$doctor->id}}" title="Show this doctor details" class="btn btn-primary">
+                                <i class="fa fa-eye"></i>
                             </a>
                         </td>
                     </tr>

@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\Special;
+use App\Models\Doctor;
 
 use Carbon\Carbon;
 
@@ -44,8 +45,8 @@ class AdminController extends Controller
         $role->save();
         return redirect()->route('admin.role.index')->with('success', 'Successfully Updated.');
     }
-    public function user_index(){
-        $users = User::latest()->paginate(10);
+    public function user_index($role_id){
+        $users = User::where('role_id', $role_id)->paginate(10);
         return view('admin.user.index', compact('users'));
     }
     public function user_create(){
@@ -133,5 +134,13 @@ class AdminController extends Controller
         $special->position = $getMaxPos+1;
         $special->save();
         return redirect()->route('admin.speciality.index')->with('success', 'Successfully Created');
+    }
+    public function doctor_index(){
+        $doctors = Doctor::latest()->paginate(10);
+        return view('admin.doctor.index', compact('doctors'));
+    }
+    public function doctor_show($id){
+        $doctor = Doctor::find($id);
+        return view('admin.doctor.show', compact('doctor'));
     }
 }

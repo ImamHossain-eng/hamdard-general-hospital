@@ -68,7 +68,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">User Management</h6>
                         <a class="collapse-item" href="/admin/role">Roles</a>
-                        <a class="collapse-item" href="/admin/user">Users</a>
+                        <a class="collapse-item" href="/admin/user/1">Admins</a>
+                        <a class="collapse-item" href="/admin/user/3">Doctors</a>
+                        <a class="collapse-item" href="/admin/user/2">Users</a>
                     </div>
                 </div>
             </li>
@@ -91,7 +93,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Resource Management</h6>
                         <a class="collapse-item" href="/admin/messages">Messages/Feedback</a>
-                        <a class="collapse-item" href="#">Users</a>
                     </div>
                 </div>
             </li>
@@ -115,7 +116,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Doctors' Details</h6>
                         <a class="collapse-item" href="/admin/speciality">Speciality</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="/admin/doctors">Doctors' List</a>                        
                     </div>
                 </div>
             </li>
