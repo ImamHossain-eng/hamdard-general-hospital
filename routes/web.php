@@ -34,8 +34,8 @@ Route::middleware('user')->group(function () {
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
     //Appointment
-    Route::get('/appointment', [UserController::class, 'user_appointment'])->name('user.appointment.index');
-    Route::get('/appointment/new', [UserController::class, 'user_appointment_create'])->name('user.appointment.create');
+    Route::get('/appoinment', [UserController::class, 'user_appointment'])->name('user.appoinment.index');
+    Route::get('/appoinment/new', [UserController::class, 'user_appointment_create'])->name('user.appoinment.create');
 
 });
 

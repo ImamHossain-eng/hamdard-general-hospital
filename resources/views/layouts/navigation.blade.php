@@ -22,7 +22,7 @@
     </li>
 
     <li class="nav-item">
-        <a href="{{ route('user.appointment.index') }}">
+        <a href="{{ route('user.appoinment.index') }}">
               <span class="icon">
                 <i class="fa fa-id-card"></i>
               </span>

@@ -6,7 +6,7 @@
             <h3 class="text-center">
                 Your Appoinment List
             </h3>
-            <a href="/user/appoinment/new" title="Doctor Appoinment" class="btn btn-primary">Doctor Appoinment</a>
+            <a href="{{route('user.appoinment.create')}}" title="Doctor Appoinment" class="btn btn-primary">Doctor Appoinment</a>
         </div>
     </div>
     <div class="card-body">
