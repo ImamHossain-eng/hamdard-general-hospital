@@ -21,7 +21,7 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item @if(request()->routeIs('user.appoinment*')) active @endif">
         <a href="{{ route('user.appoinment.index') }}">
               <span class="icon">
                 <i class="fa fa-id-card"></i>

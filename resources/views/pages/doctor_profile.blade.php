@@ -30,7 +30,7 @@
                                 {{$doctor->degree}}
                             </div>
                             <p class="card-text text-primary">
-                                {{$doctor->speciality}}
+                                {{$doctor->special->speciality}}
                             </p>
                         </div>
                     </div>

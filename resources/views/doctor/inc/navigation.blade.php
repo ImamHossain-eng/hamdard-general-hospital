@@ -29,6 +29,24 @@
         </a>
     </li>
 
+    <li class="nav-item @if(request()->routeIs('doctor.schedule*')) active @endif">
+        <a href="{{ route('doctor.schedule.index') }}">
+              <span class="icon">
+                <i class="fa fa-calendar"></i>
+              </span>
+            <span class="text">{{ __('My Schedule') }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item @if(request()->routeIs('doctor.appointment*')) active @endif">
+        <a href="{{ route('doctor.appointment.index') }}">
+              <span class="icon">
+                <i class="fa fa-id-card"></i>
+              </span>
+            <span class="text">{{ __('My Appointment') }}</span>
+        </a>
+    </li>
+
     {{-- <li class="nav-item">
         <a href="#">
               <span class="icon">

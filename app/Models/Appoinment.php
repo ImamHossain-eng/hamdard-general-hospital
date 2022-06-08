@@ -13,7 +13,7 @@ class Appoinment extends Model
     protected $fillable = [
         'user_id',
         'doctor_id',
-        'date',
+        'schedule_id',
         'prescription'
     ];
 
@@ -30,6 +30,10 @@ class Appoinment extends Model
 
     public function doctor(){
         return $this->belongsTo(Doctor::class);
+    }
+
+    public function schedule(){
+        return $this->belongsTo(Schedule::class);
     }
 
 }

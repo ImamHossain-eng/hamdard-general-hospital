@@ -1,12 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.doctor')
 @section('content')
 <div class="card">
     <div class="card-header">
         <div class="card-title">
-            <h3 class="text-center">
-                Your Appointment List
-            </h3>
-            <a href="{{route('user.appoinment.create')}}" title="Doctor Appointment" class="btn btn-primary">Doctor Appointment</a>
+            <h3 class="text-center">Your Appointments</h3>
         </div>
     </div>
     <div class="card-body">
@@ -14,46 +11,46 @@
             <thead>
                 <tr>
                     <th>Serial</th>
-                    <th>Patient</th>
-                    <th>Doctor</th>
+                    <th>Patient Name</th>
                     <th>Schedule</th>
                     <th>Status</th>
                     <th>Option</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($appoinments as $key => $app)
+                @forelse($appointments as $key => $app)
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$app->user->name}}</td>
-                        <td>{{$app->doctor->user->name}}</td>
                         <td>
                             {{$app->schedule->day}}:
-                            {{$app->schedule->start_time->format('g:ia')}} to 
+                            {{$app->schedule->start_time->format('g:ia')}} - 
                             {{$app->schedule->end_time->format('g:ia')}}
                         </td>
                         <td>
-                            @if($app->check == 0)
+                            @if($app->check == false)
                                 Pending
                             @else 
                                 Confirmed
                             @endif
                         </td>
                         <td>
-                            @if($app->check == 0)
-                            <form action="{{route('user.appoinment.destroy', $app->id)}}" method="POST">
-                                @csrf 
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" title="Delete this appointment">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                            @if($app->check != false)
+                                @if($app->prescription != null)
+                                    <a href="/doctor/appointments/{{$app->id}}" class="btn btn-primary" title="Show this Appointment Details">
+                                        <i class="fa fa-eye"></i>
+                                    </a> 
+                                @else
+                                    <a href="/doctor/appointments/{{$app->id}}/edit" title="Edit this appointment" class="btn btn-success">
+                                        <i class="fa fa-check"></i>
+                                    </a> 
+                                @endif
                             @endif
                         </td>
                     </tr>
                 @empty 
                     <tr class="table-warning text-center">
-                        <td colspan="5" class="pb-4">No Appoinment Yet</td>
+                        <td colspan="5">No Appointment</td>
                     </tr>
                 @endforelse
             </tbody>

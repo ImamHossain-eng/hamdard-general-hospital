@@ -14,4 +14,8 @@ class UserController extends Controller
     public function user_appointment_create(){
         return view('user.appoinment.create');
     }
+    public function user_appointment_destroy($id){
+        Appoinment::find($id)->delete();
+        return redirect()->route('user.appoinment.index')->with('error', 'Appointment Removed');
+    }
 }

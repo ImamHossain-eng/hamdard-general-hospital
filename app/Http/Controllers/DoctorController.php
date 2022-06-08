@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use App\Models\Schedule;
+use App\Models\Appoinment;
 
 use Image;
 
@@ -71,5 +73,51 @@ class DoctorController extends Controller
         $user->save();
         return redirect()->route('doctor.dashboard')->with('warning', 'Successfully updated your profile');
 
+    }
+    public function schedule_index(){
+        $schedules = auth()->user()->doctor->schedules;
+        return view('doctor.schedule.index', compact('schedules'));
+    }
+    public function schedule_store(Request $request){
+        $this->validate($request, [
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required'
+        ]);
+        if($request->input('day') != null){
+            $schedule = new Schedule;
+            $schedule->doctor_id = auth()->user()->doctor->id;
+            $schedule->day = $request->input('day');
+            $schedule->start_time = $request->input('start_time');
+            $schedule->end_time = $request->input('end_time');
+            $schedule->save();
+            return redirect()->route('doctor.schedule.index')->with('success', 'Successfully added your Schedule.');
+        }else{
+            return back()->withInputs()->with('error', 'Please select working day.');
+        }
+    }
+    public function schedule_destroy($id){
+        Schedule::find($id)->delete();
+        return redirect()->route('doctor.schedule.index')->with('error', 'Successfully Removed your Schedule.');
+    }
+
+    public function appointment_index(){
+        $appointments = auth()->user()->doctor->appoinments;
+        return view('doctor.appointment.index', compact('appointments'));
+    }
+    public function appointment_edit($id){
+        $app = Appoinment::find($id);
+        return view('doctor.appointment.edit', compact('app'));
+    }
+    public function appointment_update(Request $request, $id){
+        $this->validate($request, ['prescription' => 'required']);
+        $app = Appoinment::find($id);
+        $app->prescription = $request->input('prescription');
+        $app->save();
+        return redirect()->route('doctor.appointment.index')->with('warning', 'Updated Prescription.');
+    }
+    public function appointment_show($id){
+        $app = Appoinment::find($id);
+        return view('doctor.appointment.show', compact('app'));
     }
 }

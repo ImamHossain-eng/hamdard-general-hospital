@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2022 at 06:13 PM
+-- Generation Time: Jun 08, 2022 at 10:11 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -24,13 +24,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `appoinments`
+--
+
+CREATE TABLE `appoinments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `prescription` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `check` tinyint(1) NOT NULL DEFAULT 0,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `appoinments`
+--
+
+INSERT INTO `appoinments` (`id`, `user_id`, `doctor_id`, `date`, `prescription`, `check`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 8, 1, '2022-06-16', NULL, 0, NULL, '2022-06-07 18:14:02', '2022-06-07 18:14:02'),
+(2, 8, 1, '2022-06-09', NULL, 0, NULL, '2022-06-07 18:14:34', '2022-06-07 18:14:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `doctors`
 --
 
 CREATE TABLE `doctors` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
-  `speciality` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `special_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `degree` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `details` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -42,9 +68,8 @@ CREATE TABLE `doctors` (
 -- Dumping data for table `doctors`
 --
 
-INSERT INTO `doctors` (`id`, `user_id`, `speciality`, `degree`, `details`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Gainy, Expert', 'MBBS', '<p>Sample test</p>', NULL, '2022-05-25 17:56:55', '2022-05-26 16:10:32'),
-(2, 3, 'Cardiologists kjashgjksafhdgjkafh', 'BUMS, MBBS', '<p>Details</p>', NULL, '2022-05-27 17:10:13', '2022-05-27 17:16:39');
+INSERT INTO `doctors` (`id`, `user_id`, `special_id`, `degree`, `details`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 2, '1', 'MD, PhD', '<p>Details</p>', NULL, '2022-06-07 15:07:30', '2022-06-07 15:07:30');
 
 -- --------------------------------------------------------
 
@@ -86,7 +111,8 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `name`, `email`, `mobile`, `body`, `seen`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'Nomlanga Bullock', 'cigo@mailinator.com', 50, 'Dolor voluptate quia', 1, '2022-05-24 16:26:52', '2022-05-24 16:13:26', '2022-05-24 16:26:52'),
-(2, 'Kiayada Hopkins', 'gimoxyduwy@mailinator.com', 73, 'Delectus et consequ', 0, NULL, '2022-05-31 14:58:37', '2022-05-31 14:58:37');
+(2, 'Kiayada Hopkins', 'gimoxyduwy@mailinator.com', 73, 'Delectus et consequ', 0, '2022-06-01 14:40:14', '2022-05-31 14:58:37', '2022-06-01 14:40:14'),
+(3, 'Dennis Dawson', 'rivapedac@mailinator.com', 29, 'Ea tempora architect', 1, NULL, '2022-06-01 14:37:55', '2022-06-01 14:39:40');
 
 -- --------------------------------------------------------
 
@@ -113,8 +139,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2014_10_12_000000_create_users_table', 5),
 (10, '2022_05_23_215127_create_messages_table', 6),
 (11, '2022_05_24_223028_add_image_to_users_table', 7),
-(12, '2022_05_25_221306_create_doctors_table', 8),
-(13, '2022_05_31_215755_create_specials_table', 9);
+(13, '2022_05_31_215755_create_specials_table', 9),
+(14, '2022_05_25_221306_create_doctors_table', 10),
+(15, '2022_06_07_215359_create_appoinments_table', 11);
 
 -- --------------------------------------------------------
 
@@ -185,6 +212,14 @@ CREATE TABLE `specials` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `specials`
+--
+
+INSERT INTO `specials` (`id`, `speciality`, `position`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Cardiologists', 1, NULL, '2022-06-04 16:19:41', '2022-06-04 16:19:41'),
+(2, 'Neurologists', 2, NULL, '2022-06-04 16:20:45', '2022-06-04 16:20:45');
+
 -- --------------------------------------------------------
 
 --
@@ -211,15 +246,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `active`, `last_login`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-05-31 22:04:21', NULL, '2022-05-23 16:42:52', '2022-05-31 16:04:21', NULL),
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-06-07 23:29:18', NULL, '2022-05-23 16:42:52', '2022-06-07 17:29:18', NULL),
 (2, 'Dr. Kazmi', 'kazmi@gmail.com', NULL, '$2y$10$DknRb4YQWk03XeeoYjbKweq5clVy8k38xzxnBI/aCVfrO2zx.YpE6', 3, 0, NULL, NULL, '2022-05-24 16:36:13', '2022-05-26 16:41:18', '1653583278.jpg'),
 (3, 'Dr. Khairul Alam', 'khairul@gmail.com', NULL, '$2y$10$yr1STqNNCYbWjnIvGuSs3.dbvyv2o.s0JBHY80lyNbFjQaR5fgACe', 3, 0, NULL, NULL, '2022-05-27 17:09:04', '2022-05-27 17:14:15', '1653671655.png'),
-(4, 'Toma Akter', 'toma@gmail.com', NULL, '$2y$10$eLfI3ucexAJfxNF6afEBi.c0wtv7Ppe7S9d6xJONOkoT8sxPzjad.', 2, 0, NULL, NULL, '2022-05-29 14:33:04', '2022-05-29 14:48:11', '1653835691.png'),
-(5, 'User', 'user@gmail.com', NULL, '$2y$10$2uGHTChco6.bBL4fMRoNPOeUkNRDL8EbtxZAVgWPaHGzx6k.iTzwq', 2, 0, NULL, NULL, '2022-05-31 15:06:30', '2022-05-31 15:06:30', NULL);
+(8, 'User', 'user@gmail.com', NULL, '$2y$10$pySw1ayZeN5D94bbbx8EcuwdfnEiYfhcPcVR7aNIxNY/vgHnMiy0G', 2, 0, NULL, NULL, '2022-06-07 15:42:34', '2022-06-07 15:42:34', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `appoinments`
+--
+ALTER TABLE `appoinments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `doctors`
@@ -284,10 +324,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `appoinments`
+--
+ALTER TABLE `appoinments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -299,13 +345,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -317,19 +363,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `specials`
 --
 ALTER TABLE `specials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -36,6 +36,7 @@ Route::middleware('user')->group(function () {
     //Appointment
     Route::get('/appoinment', [UserController::class, 'user_appointment'])->name('user.appoinment.index');
     Route::get('/appoinment/new', [UserController::class, 'user_appointment_create'])->name('user.appoinment.create');
+    Route::delete('/appoinment/{id}', [UserController::class, 'user_appointment_destroy'])->name('user.appoinment.destroy');
 
 });
 
@@ -49,6 +50,18 @@ Route::prefix('doctor')->middleware('doctor')->group(function () {
     //User Profile
     Route::get('/auth_profile', [DoctorController::class, 'auth_profile'])->name('doctor.auth.profile');
     Route::put('/auth_profile', [DoctorController::class, 'auth_profile_update'])->name('doctor.auth.update');
+
+    //Schedule
+    Route::get('/schedule', [DoctorController::class, 'schedule_index'])->name('doctor.schedule.index');
+    Route::view('/schedule/create', 'doctor.schedule.create');
+    Route::post('/schedule', [DoctorController::class, 'schedule_store'])->name('doctor.schedule.store');
+    Route::delete('/schedule/{id}', [DoctorController::class, 'schedule_destroy'])->name('doctor.schedule.destroy');
+
+    //Appointment
+    Route::get('/appointments', [DoctorController::class, 'appointment_index'])->name('doctor.appointment.index');
+    Route::get('/appointments/{id}/edit', [DoctorController::class, 'appointment_edit'])->name('doctor.appointment.edit');
+    Route::patch('/appointments/{id}', [DoctorController::class, 'appointment_update'])->name('doctor.appointment.update');
+    Route::get('/appointments/{id}', [DoctorController::class, 'appointment_show'])->name('doctor.appointment.show');
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
