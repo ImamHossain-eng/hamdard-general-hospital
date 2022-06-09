@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Message;
 use App\Models\Special;
 use App\Models\Doctor;
+use App\Models\Appoinment;
 
 use Carbon\Carbon;
 
@@ -142,5 +143,19 @@ class AdminController extends Controller
     public function doctor_show($id){
         $doctor = Doctor::find($id);
         return view('admin.doctor.show', compact('doctor'));
+    }
+    public function appointments_index(){
+        $appointments = Appoinment::latest()->paginate(10);
+        return view('admin.appointment.index', compact('appointments'));
+    }
+    public function appointments_update_status($id){
+        $app = Appoinment::find($id);
+        $app->check = true;
+        $app->save();
+        return redirect()->route('admin.appointment.index')->with('warning', 'Appointment Confirmed.');
+    }
+    public function appointments_show($id){
+        $app = Appoinment::find($id);
+        return view('admin.appointment.show', compact('app'));
     }
 }

@@ -93,6 +93,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Resource Management</h6>
                         <a class="collapse-item" href="/admin/messages">Messages/Feedback</a>
+                        <a class="collapse-item" href="/admin/appointments">Appointments</a>
                     </div>
                 </div>
             </li>

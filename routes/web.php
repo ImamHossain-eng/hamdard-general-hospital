@@ -41,6 +41,7 @@ Route::middleware('user')->group(function () {
 });
 
 Route::prefix('doctor')->middleware('doctor')->group(function () {
+
     Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
 
     //my profile
@@ -62,13 +63,14 @@ Route::prefix('doctor')->middleware('doctor')->group(function () {
     Route::get('/appointments/{id}/edit', [DoctorController::class, 'appointment_edit'])->name('doctor.appointment.edit');
     Route::patch('/appointments/{id}', [DoctorController::class, 'appointment_update'])->name('doctor.appointment.update');
     Route::get('/appointments/{id}', [DoctorController::class, 'appointment_show'])->name('doctor.appointment.show');
+
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::redirect('/', '/dashboard');
     Route::get('/dashboard', [AdminController::class, 'home'])->name('admin.dashboard');
 
-    //ROle Management
+    //Role Management
     Route::get('/role', [AdminController::class, 'role_index'])->name('admin.role.index');
     Route::view('/role/create', 'admin.role.create')->name('admin.role.create');
     Route::post('/role', [AdminController::class, 'role_store'])->name('admin.role.store');
@@ -95,4 +97,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
 
     Route::get('/doctors', [AdminController::class, 'doctor_index'])->name('admin.doctor.index');
     Route::get('/doctors/{id}', [AdminController::class, 'doctor_show'])->name('admin.doctor.show');
+
+    Route::get('/appointments', [AdminController::class, 'appointments_index'])->name('admin.appointment.index');
+    Route::put('/appointments/{id}', [AdminController::class, 'appointments_update_status'])->name('admin.appointment.update');
+    Route::get('/appointments/{id}', [AdminController::class, 'appointments_show'])->name('admin.appointment.show');
+
 });
