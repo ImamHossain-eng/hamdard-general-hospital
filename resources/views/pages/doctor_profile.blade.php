@@ -3,8 +3,18 @@
 <body>
     <div class="row bg-dark pb-2 pt-2" style="">
         <div class="" style="margin-left: 15em;">
-          <a href="/login" class="p-2 btn btn-primary">Login</a>
-          <a href="/register" class="p-2 btn btn-success">Register</a>
+            @if(auth()->check())
+            @if(auth()->user()->role_id == 1)
+              <a href="/admin/dashboard" class="p-2 btn btn-warning">Admin Dashboard</a>
+              @elseif(auth()->user()->role_id == 3)
+              <a href="/doctor/dashboard" class="p-2 btn btn-warning">Doctor Dashboard</a>
+              @else
+              <a href="/home" class="p-2 btn btn-warning">Dashboard</a>
+            @endif
+            @else
+            <a href="/login" class="p-2 btn btn-primary">Login</a>
+            <a href="/register" class="p-2 btn btn-success">Register</a>
+            @endif    
                       
         </div>
       </div>

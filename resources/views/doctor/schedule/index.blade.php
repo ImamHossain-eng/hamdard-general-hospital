@@ -27,9 +27,12 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$schedule->day}}</td>
-                            <td>{{$schedule->start_time}}</td>
-                            <td>{{$schedule->end_time}}</td>
-                            <td>{{$schedule->created_at->diffForHumans()}}</td>
+                            <td>{{$schedule->start_time->format('g:ia')}}</td>
+                            <td>{{$schedule->end_time->format('g:ia')}}</td>
+                            <td>{{$schedule->created_at->diffForHumans()}} / 
+                                {{$schedule->created_at->format('F d, Y')}} at 
+                                {{$schedule->created_at->format('g:ia')}}
+                            </td>
                             <td>
                                 <form action="{{route('doctor.schedule.destroy', $schedule->id)}}" method="POST">
                                     @csrf 

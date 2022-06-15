@@ -103,3 +103,4 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::get('/appointments/{id}', [AdminController::class, 'appointments_show'])->name('admin.appointment.show');
 
 });
+

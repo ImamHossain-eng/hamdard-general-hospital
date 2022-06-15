@@ -69,7 +69,7 @@
         </a>
     </li> --}}
 
-    <li class="nav-item nav-item-has-children">
+    {{-- <li class="nav-item nav-item-has-children">
         <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_1"
            aria-controls="ddmenu_1" aria-expanded="true" aria-label="Toggle navigation">
             <span class="icon">
@@ -86,5 +86,5 @@
                 <a href="#">Child menu</a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 </ul>

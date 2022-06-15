@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2022 at 10:11 AM
+-- Generation Time: Jun 15, 2022 at 05:41 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -31,7 +31,7 @@ CREATE TABLE `appoinments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `schedule_id` int(11) NOT NULL,
   `prescription` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `check` tinyint(1) NOT NULL DEFAULT 0,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -43,9 +43,10 @@ CREATE TABLE `appoinments` (
 -- Dumping data for table `appoinments`
 --
 
-INSERT INTO `appoinments` (`id`, `user_id`, `doctor_id`, `date`, `prescription`, `check`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 8, 1, '2022-06-16', NULL, 0, NULL, '2022-06-07 18:14:02', '2022-06-07 18:14:02'),
-(2, 8, 1, '2022-06-09', NULL, 0, NULL, '2022-06-07 18:14:34', '2022-06-07 18:14:34');
+INSERT INTO `appoinments` (`id`, `user_id`, `doctor_id`, `schedule_id`, `prescription`, `check`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 8, 1, 2, NULL, 1, NULL, '2022-06-08 15:49:01', '2022-06-08 15:49:01'),
+(2, 8, 1, 4, '<ol>\r\n	<li>Paracetamol 500 mg / daily 3 times after meal.</li>\r\n	<li>Esomeprazole 500mg / daily 2 time before 15 mins of meal.</li>\r\n</ol>', 1, NULL, '2022-06-08 15:55:26', '2022-06-08 16:30:30'),
+(3, 8, 1, 2, NULL, 1, NULL, '2022-06-08 15:58:36', '2022-06-09 15:53:21');
 
 -- --------------------------------------------------------
 
@@ -141,7 +142,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2022_05_24_223028_add_image_to_users_table', 7),
 (13, '2022_05_31_215755_create_specials_table', 9),
 (14, '2022_05_25_221306_create_doctors_table', 10),
-(15, '2022_06_07_215359_create_appoinments_table', 11);
+(16, '2022_06_08_204447_create_schedules_table', 12),
+(17, '2022_06_07_215359_create_appoinments_table', 13);
 
 -- --------------------------------------------------------
 
@@ -200,6 +202,31 @@ INSERT INTO `roles` (`id`, `name`, `status`, `deleted_at`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `schedules`
+--
+
+CREATE TABLE `schedules` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `day` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `end_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `schedules`
+--
+
+INSERT INTO `schedules` (`id`, `doctor_id`, `day`, `start_time`, `end_time`, `created_at`, `updated_at`) VALUES
+(2, 1, 'Saturday', '10:00', '16:10', '2022-06-08 15:19:13', '2022-06-08 15:19:13'),
+(3, 1, 'Monday', '10:00', '16:10', '2022-06-08 15:23:06', '2022-06-08 15:23:06'),
+(4, 1, 'Wednesday', '16:59', '23:15', '2022-06-08 15:23:51', '2022-06-08 15:23:51');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `specials`
 --
 
@@ -246,7 +273,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `active`, `last_login`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-06-07 23:29:18', NULL, '2022-05-23 16:42:52', '2022-06-07 17:29:18', NULL),
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-06-09 21:08:21', NULL, '2022-05-23 16:42:52', '2022-06-09 15:08:21', NULL),
 (2, 'Dr. Kazmi', 'kazmi@gmail.com', NULL, '$2y$10$DknRb4YQWk03XeeoYjbKweq5clVy8k38xzxnBI/aCVfrO2zx.YpE6', 3, 0, NULL, NULL, '2022-05-24 16:36:13', '2022-05-26 16:41:18', '1653583278.jpg'),
 (3, 'Dr. Khairul Alam', 'khairul@gmail.com', NULL, '$2y$10$yr1STqNNCYbWjnIvGuSs3.dbvyv2o.s0JBHY80lyNbFjQaR5fgACe', 3, 0, NULL, NULL, '2022-05-27 17:09:04', '2022-05-27 17:14:15', '1653671655.png'),
 (8, 'User', 'user@gmail.com', NULL, '$2y$10$pySw1ayZeN5D94bbbx8EcuwdfnEiYfhcPcVR7aNIxNY/vgHnMiy0G', 2, 0, NULL, NULL, '2022-06-07 15:42:34', '2022-06-07 15:42:34', NULL);
@@ -307,6 +334,12 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `schedules`
+--
+ALTER TABLE `schedules`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `specials`
 --
 ALTER TABLE `specials`
@@ -327,7 +360,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appoinments`
 --
 ALTER TABLE `appoinments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `doctors`
@@ -351,7 +384,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -363,6 +396,12 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `schedules`
+--
+ALTER TABLE `schedules`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --

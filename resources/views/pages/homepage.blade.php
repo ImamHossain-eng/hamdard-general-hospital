@@ -188,7 +188,6 @@
                             <button type="submit" id="form-submit" class="button">Send Now</button>
                           </fieldset>
                       </div>
-                      <a href="/login" class="btn btn-primary" style="right:0px; top: 0px; display: fixed;">Login</a>
                   </form>
               </div>
           </div>
