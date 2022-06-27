@@ -40,16 +40,20 @@
                             @endif
                         </td>
                         <td>
+                            <a href="{{route('user.appoinment.show', $app->id)}}" class="btn btn-primary" title="Show this Appointment Details">
+                                <i class="fa fa-eye"></i>
+                            </a>
                             @if($app->check == 0)
-                            <form action="{{route('user.appoinment.destroy', $app->id)}}" method="POST">
-                                @csrf 
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" title="Delete this appointment">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                                <form action="{{route('user.appoinment.destroy', $app->id)}}" method="POST">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" title="Delete this appointment">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
                             @endif
                         </td>
+
                     </tr>
                 @empty 
                     <tr class="table-warning text-center">

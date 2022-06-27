@@ -18,4 +18,8 @@ class UserController extends Controller
         Appoinment::find($id)->delete();
         return redirect()->route('user.appoinment.index')->with('error', 'Appointment Removed');
     }
+    public function user_appointment_show($id){
+        $app = Appoinment::find($id);
+        return view('user.appoinment.show', compact('app'));
+    }
 }

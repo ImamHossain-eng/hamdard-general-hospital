@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('content')
 <div class="card mt-4">
     <div class="card-header">
         <div class="card-title">
-            <h3 class="text-center">Show {{$app->user->name}} Appointment</h3>
+            <h3 class="text-center">Your Appointment</h3>
         </div>
     </div>
     <div class="card-body">

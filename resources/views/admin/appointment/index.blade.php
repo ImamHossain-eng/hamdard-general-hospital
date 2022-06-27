@@ -37,7 +37,7 @@
                             <td>{{$app->created_at->diffForHumans()}}</td>
                             <td>
                                 @if($app->check == false)
-                                    <form action="{{route('admin.appointment.update', $app->id)}}" method="POST">
+                                    <form action="{{route('admin.appointment.update', $app->id)}}" method="POST" style="display:inline;">
                                         @csrf 
                                         @method('PUT')
                                         <button type="submit" class="btn btn-success" title="Confirm this appointment">

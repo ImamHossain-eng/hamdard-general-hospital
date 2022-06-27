@@ -27,7 +27,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 
-Route::middleware('user')->group(function () {
+Route::middleware('user')->prefix('user')->group(function () {
     Route::view('about', 'about')->name('about')->middleware('auth');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
@@ -37,6 +37,7 @@ Route::middleware('user')->group(function () {
     Route::get('/appoinment', [UserController::class, 'user_appointment'])->name('user.appoinment.index');
     Route::get('/appoinment/new', [UserController::class, 'user_appointment_create'])->name('user.appoinment.create');
     Route::delete('/appoinment/{id}', [UserController::class, 'user_appointment_destroy'])->name('user.appoinment.destroy');
+    Route::get('/appointment/{id}', [UserController::class, 'user_appointment_show'])->name('user.appoinment.show');
 
 });
 
