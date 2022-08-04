@@ -16,7 +16,7 @@
                 <p style="border-left: 1px solid #3f3333; padding-left: 1em;">
                     <strong>Name: </strong> {{$message->name}} <br>
                     <strong>Email: </strong> {{$message->email}} <br>
-                    <strong>Mobile: </strong> {{$message->mobile}} <br>
+                    <strong>Mobile: </strong>+880{{$message->mobile}} <br>
                     <strong>Received: </strong> {{$message->created_at->diffForHumans()}} / {{\Carbon\Carbon::parse($message->created_at)->format('F d, Y - g:ia')}} <br>
                     <strong>Seen: </strong> {{$message->updated_at->diffForHumans()}} / {{\Carbon\Carbon::parse($message->updated_at)->format('F d, Y - g:ia')}} <br>
                 </p>

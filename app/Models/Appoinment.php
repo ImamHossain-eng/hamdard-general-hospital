@@ -14,7 +14,8 @@ class Appoinment extends Model
         'user_id',
         'doctor_id',
         'schedule_id',
-        'prescription'
+        'prescription',
+        'payment_id'
     ];
 
     protected $dates = [

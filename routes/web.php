@@ -80,11 +80,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
 
     //User Management
     Route::get('/user/{role_id}', [AdminController::class, 'user_index'])->name('admin.user.index');
-    Route::get('/user/create', [AdminController::class, 'user_create'])->name('admin.user.create');
+    //Route::get('/user/create', [AdminController::class, 'user_create'])->name('admin.user.create');
+    Route::get('/user/create/new_user', [AdminController::class, 'user_create'])->name('admin.user.create');
     Route::post('/user', [AdminController::class, 'user_store'])->name('admin.user.store');
-    Route::delete('user/{id}', [AdminController::class, 'user_destroy'])->name('admin.user.destroy');
-    Route::get('user/{id}/edit', [AdminController::class, 'user_edit'])->name('admin.user.edit');
-    Route::put('user/{id}', [AdminController::class, 'user_update'])->name('admin.user.update');
+    Route::delete('/user/{id}', [AdminController::class, 'user_destroy'])->name('admin.user.destroy');
+    Route::get('/user/{id}/edit', [AdminController::class, 'user_edit'])->name('admin.user.edit');
+    Route::put('/user/{id}', [AdminController::class, 'user_update'])->name('admin.user.update');
 
     //Message
     Route::get('/messages', [AdminController::class, 'message_index'])->name('admin.message.index');

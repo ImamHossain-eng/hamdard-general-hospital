@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2022 at 05:41 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Jun 28, 2022 at 11:53 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,6 +32,7 @@ CREATE TABLE `appoinments` (
   `user_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
   `schedule_id` int(11) NOT NULL,
+  `date` date DEFAULT NULL,
   `prescription` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `check` tinyint(1) NOT NULL DEFAULT 0,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -43,10 +44,8 @@ CREATE TABLE `appoinments` (
 -- Dumping data for table `appoinments`
 --
 
-INSERT INTO `appoinments` (`id`, `user_id`, `doctor_id`, `schedule_id`, `prescription`, `check`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 8, 1, 2, NULL, 1, NULL, '2022-06-08 15:49:01', '2022-06-08 15:49:01'),
-(2, 8, 1, 4, '<ol>\r\n	<li>Paracetamol 500 mg / daily 3 times after meal.</li>\r\n	<li>Esomeprazole 500mg / daily 2 time before 15 mins of meal.</li>\r\n</ol>', 1, NULL, '2022-06-08 15:55:26', '2022-06-08 16:30:30'),
-(3, 8, 1, 2, NULL, 1, NULL, '2022-06-08 15:58:36', '2022-06-09 15:53:21');
+INSERT INTO `appoinments` (`id`, `user_id`, `doctor_id`, `schedule_id`, `date`, `prescription`, `check`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(3, 9, 1, 1, NULL, '<ol>\r\n	<li>ksjfhkjsghkghdj</li>\r\n</ol>', 1, NULL, '2022-06-28 09:38:31', '2022-06-28 09:47:50');
 
 -- --------------------------------------------------------
 
@@ -113,7 +112,8 @@ CREATE TABLE `messages` (
 INSERT INTO `messages` (`id`, `name`, `email`, `mobile`, `body`, `seen`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'Nomlanga Bullock', 'cigo@mailinator.com', 50, 'Dolor voluptate quia', 1, '2022-05-24 16:26:52', '2022-05-24 16:13:26', '2022-05-24 16:26:52'),
 (2, 'Kiayada Hopkins', 'gimoxyduwy@mailinator.com', 73, 'Delectus et consequ', 0, '2022-06-01 14:40:14', '2022-05-31 14:58:37', '2022-06-01 14:40:14'),
-(3, 'Dennis Dawson', 'rivapedac@mailinator.com', 29, 'Ea tempora architect', 1, NULL, '2022-06-01 14:37:55', '2022-06-01 14:39:40');
+(3, 'Dennis Dawson', 'rivapedac@mailinator.com', 29, 'Ea tempora architect', 1, NULL, '2022-06-01 14:37:55', '2022-06-01 14:39:40'),
+(4, 'sadia', 'sadia@gmail.com', 1915970075, 'Hllo thr', 1, NULL, '2022-06-28 09:09:35', '2022-06-28 09:11:27');
 
 -- --------------------------------------------------------
 
@@ -142,8 +142,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2022_05_24_223028_add_image_to_users_table', 7),
 (13, '2022_05_31_215755_create_specials_table', 9),
 (14, '2022_05_25_221306_create_doctors_table', 10),
-(16, '2022_06_08_204447_create_schedules_table', 12),
-(17, '2022_06_07_215359_create_appoinments_table', 13);
+(15, '2022_06_07_215359_create_appoinments_table', 11),
+(16, '2022_06_08_204447_create_schedules_table', 12);
 
 -- --------------------------------------------------------
 
@@ -220,9 +220,8 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`id`, `doctor_id`, `day`, `start_time`, `end_time`, `created_at`, `updated_at`) VALUES
-(2, 1, 'Saturday', '10:00', '16:10', '2022-06-08 15:19:13', '2022-06-08 15:19:13'),
-(3, 1, 'Monday', '10:00', '16:10', '2022-06-08 15:23:06', '2022-06-08 15:23:06'),
-(4, 1, 'Wednesday', '16:59', '23:15', '2022-06-08 15:23:51', '2022-06-08 15:23:51');
+(1, 1, 'Sunday', '2022-06-28 09:30:00', '2022-06-28 16:30:00', '2022-06-28 09:30:51', '2022-06-28 09:30:51'),
+(2, 1, 'Tuesday', '2022-06-28 06:00:00', '2022-06-28 15:30:00', '2022-06-28 09:32:21', '2022-06-28 09:32:21');
 
 -- --------------------------------------------------------
 
@@ -273,10 +272,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `active`, `last_login`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-06-09 21:08:21', NULL, '2022-05-23 16:42:52', '2022-06-09 15:08:21', NULL),
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-06-28 15:40:28', NULL, '2022-05-23 16:42:52', '2022-06-28 09:40:28', NULL),
 (2, 'Dr. Kazmi', 'kazmi@gmail.com', NULL, '$2y$10$DknRb4YQWk03XeeoYjbKweq5clVy8k38xzxnBI/aCVfrO2zx.YpE6', 3, 0, NULL, NULL, '2022-05-24 16:36:13', '2022-05-26 16:41:18', '1653583278.jpg'),
 (3, 'Dr. Khairul Alam', 'khairul@gmail.com', NULL, '$2y$10$yr1STqNNCYbWjnIvGuSs3.dbvyv2o.s0JBHY80lyNbFjQaR5fgACe', 3, 0, NULL, NULL, '2022-05-27 17:09:04', '2022-05-27 17:14:15', '1653671655.png'),
-(8, 'User', 'user@gmail.com', NULL, '$2y$10$pySw1ayZeN5D94bbbx8EcuwdfnEiYfhcPcVR7aNIxNY/vgHnMiy0G', 2, 0, NULL, NULL, '2022-06-07 15:42:34', '2022-06-07 15:42:34', NULL);
+(8, 'User', 'user@gmail.com', NULL, '$2y$10$pySw1ayZeN5D94bbbx8EcuwdfnEiYfhcPcVR7aNIxNY/vgHnMiy0G', 2, 0, NULL, NULL, '2022-06-07 15:42:34', '2022-06-07 15:42:34', NULL),
+(9, 'tonoy', 'tonoy@gmail.com', NULL, '$2y$10$ubDIz3ySTNOIweg7RFHApOvMEweyEa0lLRFOIcOyX6P0oAz4r/Zca', 2, 0, NULL, NULL, '2022-06-28 08:39:53', '2022-06-28 08:55:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -378,13 +378,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -402,7 +402,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `specials`
@@ -414,7 +414,7 @@ ALTER TABLE `specials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

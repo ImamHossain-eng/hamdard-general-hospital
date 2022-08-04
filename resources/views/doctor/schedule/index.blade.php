@@ -45,7 +45,7 @@
                         </tr>
                     @empty 
                         <tr class="table-warning text-center">
-                            <td colspan="5">
+                            <td colspan="6">
                                 No Schedule Added <br><br>
                             </td>
                         </tr>

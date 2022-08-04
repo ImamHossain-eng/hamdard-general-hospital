@@ -4,7 +4,7 @@
     <div class="card-header">
         <div class="card-title">
             <h3 class="text-center">All Users</h3>
-            <a href="/admin/user/create" title="Insert a new user" class="btn btn-primary">Add New User</a>
+            <a href="{{route('admin.user.create')}}" title="Insert a new user" class="btn btn-primary">Add New User</a>
         </div>
     </div>
     <div class="card-body">

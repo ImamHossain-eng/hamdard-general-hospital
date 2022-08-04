@@ -103,7 +103,7 @@ class AdminController extends Controller
         $user->role_id = $request->input('role_id');
         $user->save();
 
-        return redirect()->route('admin.user.index')->with('warning', 'Successfully Updated.');
+        return redirect()->route('admin.user.index', $user->role_id)->with('warning', 'Successfully Updated.');
     }
     public function message_index() {
         $messages = Message::latest()->paginate(10);

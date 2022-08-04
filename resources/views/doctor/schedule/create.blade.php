@@ -28,7 +28,7 @@
                     <input type="time" name="start_time" class="form-control" placeholder="Starting Time">
                 </div>
                 <div class="form-group mb-4">
-                    <label for="end_time">Choose your Starting Time of Duty</label>
+                    <label for="end_time">Choose your Ending Time of Duty</label>
                     <input type="time" name="end_time" class="form-control" placeholder="Ending Time">
                 </div>
                 <input type="submit" value="Save" class="btn btn-primary w-100">

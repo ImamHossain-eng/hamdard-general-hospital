@@ -18,6 +18,7 @@
                     <th>Doctor</th>
                     <th>Schedule</th>
                     <th>Status</th>
+                    <th>Payment</th>
                     <th>Option</th>
                 </tr>
             </thead>
@@ -39,12 +40,13 @@
                                 Confirmed
                             @endif
                         </td>
+                        <td>@if($app->payment_id == 0) Pending @else Confirmed @endif</td>
                         <td>
                             <a href="{{route('user.appoinment.show', $app->id)}}" class="btn btn-primary" title="Show this Appointment Details">
                                 <i class="fa fa-eye"></i>
                             </a>
                             @if($app->check == 0)
-                                <form action="{{route('user.appoinment.destroy', $app->id)}}" method="POST">
+                                <form action="{{route('user.appoinment.destroy', $app->id)}}" method="POST" class="d-inline">
                                     @csrf 
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" title="Delete this appointment">
@@ -57,7 +59,7 @@
                     </tr>
                 @empty 
                     <tr class="table-warning text-center">
-                        <td colspan="5" class="pb-4">No Appoinment Yet</td>
+                        <td colspan="6" class="pb-4">No Appoinment Yet</td>
                     </tr>
                 @endforelse
             </tbody>
