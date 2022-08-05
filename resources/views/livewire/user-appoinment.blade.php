@@ -41,10 +41,16 @@
                         @endif
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary w-100 mt-4" value="Get Appointment">
+                <div class="form-group mb-4">
+                    <label for="price">Appointment Cost</label>
+                    <input type="number" class="form-control" wire:model="price" disabled>
+                   
                 </div>
+
+                
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary w-100 mt-4" value="Get Appointment">
             </div>
         </div>
     </form>

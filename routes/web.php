@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PagesController;
@@ -29,9 +32,27 @@ Auth::routes();
 
 Route::post('/custom/password-reset', [PagesController::class, 'password_update'])->name('custom.password.update');
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 
-Route::middleware('user')->prefix('user')->group(function () {
+
+Route::middleware('user')->prefix('user')->group(function () { 
     Route::view('about', 'about')->name('about')->middleware('auth');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
@@ -42,6 +63,9 @@ Route::middleware('user')->prefix('user')->group(function () {
     Route::get('/appoinment/new', [UserController::class, 'user_appointment_create'])->name('user.appoinment.create');
     Route::delete('/appoinment/{id}', [UserController::class, 'user_appointment_destroy'])->name('user.appoinment.destroy');
     Route::get('/appointment/{id}', [UserController::class, 'user_appointment_show'])->name('user.appoinment.show');
+    Route::get('/appointment/{id}/treatment', [UserController::class, 'user_appointment_treatment'])->name('user.appoinment.treatment');
+    Route::put('/appointment/{id}/treatment', [UserController::class, 'user_appointment_treatment_update'])->name('user.appoinment.treatment.update');
+    Route::post('/appointment', [UserController::class, 'appointment_test'])->name('user.appoinment.test');
 
 });
 

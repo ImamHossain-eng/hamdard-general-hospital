@@ -56,7 +56,6 @@ class PagesController extends Controller
         }
        
         return redirect()->route('login')->with('success', 'Password has been changed. Please Login Now.');
-
     
     }
 }

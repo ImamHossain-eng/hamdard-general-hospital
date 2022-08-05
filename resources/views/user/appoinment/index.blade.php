@@ -59,7 +59,7 @@
                     </tr>
                 @empty 
                     <tr class="table-warning text-center">
-                        <td colspan="6" class="pb-4">No Appoinment Yet</td>
+                        <td colspan="7" class="pb-4">No Appoinment Yet</td>
                     </tr>
                 @endforelse
             </tbody>

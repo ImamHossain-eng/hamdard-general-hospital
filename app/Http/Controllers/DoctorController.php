@@ -20,27 +20,31 @@ class DoctorController extends Controller
     }
     public function my_profile_update(Request $request){
         $this->validate($request, [
-            'special_id' => 'required',
             'degree' => 'required|string',
             'details' => 'required|string',
         ]);
 
         $db_doctor = auth()->user()->doctor;
-        // if($request->input('special_id') == null){
-        //     return back()->withInputs();
-        // }
+        if($request->input('special_id') != null){
+            $special_id = $request->input('special_id');
+        }else{
+            $special_id = $db_doctor->special_id;
+        }
         if(!$db_doctor){
             $doctor = new Doctor;
             $doctor->user_id = auth()->user()->id;
             $doctor->special_id = $request->input('special_id');
             $doctor->degree = $request->input('degree');
             $doctor->details = $request->input('details');
+            $doctor->price = $request->input('price');
             $doctor->save();
         }else{
             $doctor = auth()->user()->doctor;
-            $doctor->special_id = $request->input('special_id');
+            $doctor->special_id = $special_id;
             $doctor->degree = $request->input('degree');
             $doctor->details = $request->input('details');
+            $doctor->price = $request->input('price');
+
             $doctor->save();
         }
         return redirect()->route('doctor.dashboard');

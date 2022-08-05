@@ -37,4 +37,8 @@ class Appoinment extends Model
         return $this->belongsTo(Schedule::class);
     }
 
+    public function app_test(){
+        return $this->hasOne(App_test::class);
+    }
+
 }

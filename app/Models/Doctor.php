@@ -10,7 +10,7 @@ class Doctor extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'special_id', 'degree', 'details'];
+    protected $fillable = ['user_id', 'special_id', 'degree', 'details', 'price'];
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 

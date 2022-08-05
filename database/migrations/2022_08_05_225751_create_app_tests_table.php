@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPaymentIdToAppointmentsTable extends Migration
+class CreateAppTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddPaymentIdToAppointmentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('appoinments', function (Blueprint $table) {
-            $table->integer('payment_id');
+        Schema::create('app_tests', function (Blueprint $table) {
+            $table->id();
+            $table->integer('appoinment_id');
+            $table->string('file')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddPaymentIdToAppointmentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('appoinments', function (Blueprint $table) {
-            $table->dropColumn('payment_id');
-        });
+        Schema::dropIfExists('app_tests');
     }
 }

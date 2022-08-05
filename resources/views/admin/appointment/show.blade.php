@@ -14,7 +14,8 @@
                 <strong>Schedule Day: </strong> {{$app->schedule->day}} <br>
                 <strong>Time Slot: </strong> {{$app->schedule->start_time->format('g:ia')}} to {{$app->schedule->end_time->format('g:ia')}} <br>
                 <strong>Status: </strong> @if($app->check == true) Confirmed @else Pending @endif <br>  
-                @if($app->check == false)
+                <strong>Payment: </strong> @if($app->payment == true) Confirmed @else Pending @endif <br>  
+                @if($app->payment == true)
                                     <form action="{{route('admin.appointment.update', $app->id)}}" method="POST" style="display:inline;">
                                         @csrf 
                                         @method('PUT')
@@ -24,9 +25,17 @@
                                     </form>
                                 @endif
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <strong>Prescription</strong>
                 {!!$app->prescription!!}  
+            </div>
+            <div class="col-md-4">
+                @if($app->test == true)
+                    <strong>Test Documents:</strong>
+                    <iframe src="{{asset('files/patient/test/'.$app->app_test->file)}}" class="w-100 h-40"></iframe>
+                    
+                @endif
+                
             </div>
         </div>
     </div>

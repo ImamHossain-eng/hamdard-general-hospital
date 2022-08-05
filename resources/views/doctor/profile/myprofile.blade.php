@@ -26,6 +26,9 @@
                 <input type="text" name="degree" value="{{auth()->user()->doctor ? auth()->user()->doctor->degree : ''}}" placeholder="Your Degree" class="form-control">
             </div>
             <div class="form-group mb-3">
+                <input type="number" name="price" value="{{auth()->user()->doctor ? auth()->user()->doctor->price : ''}}" placeholder="Your Pricing" class="form-control">
+            </div>
+            <div class="form-group mb-3">
                 <textarea name="details" class="form-control">
                     {{auth()->user()->doctor ? auth()->user()->doctor->details : ''}}
                 </textarea>

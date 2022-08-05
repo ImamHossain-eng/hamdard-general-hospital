@@ -20,6 +20,11 @@ class CreateAppoinmentsTable extends Migration
             $table->integer('schedule_id');
             $table->mediumText('prescription')->nullable();
             $table->boolean('check')->default(false);
+            $table->boolean('payment')->default(false);
+            $table->string('patient_name')->nullable();
+            $table->string('patient_age')->nullable();
+            $table->string('patient_weight')->nullable();
+            $table->boolean('test')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

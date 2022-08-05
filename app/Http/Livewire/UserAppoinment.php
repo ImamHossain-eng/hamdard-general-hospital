@@ -8,7 +8,7 @@ use App\Models\Special;
 use App\Models\Doctor;
 use App\Models\Appoinment;
 // use App\Models\Schedule;
-
+ 
 class UserAppoinment extends Component
 {
 
@@ -18,6 +18,7 @@ class UserAppoinment extends Component
 
     public $doctors;
     public $schedules;
+    public $price;
 
 
     public function loadDoctors(){
@@ -26,6 +27,7 @@ class UserAppoinment extends Component
 
     public function loadSchedules(){
         $this->schedules = Doctor::find($this->doctor_id)->schedules;    
+        $this->price = Doctor::find($this->doctor_id)->price;    
     }
 
     public function saveAppointment(){
@@ -34,8 +36,9 @@ class UserAppoinment extends Component
             $app->user_id = auth()->user()->id;
             $app->doctor_id = $this->doctor_id;
             $app->schedule_id = $this->schedule_id;
+            $app->payment = false;
             $app->save();
-            return redirect()->route('user.appoinment.index')->with('success', 'Appointment requested successfully.');
+            return redirect()->route('user.appoinment.treatment', $app->id)->with('success', 'Appointment requested successfully.');
         }
         // Appoinment::create([
         //     'user_id' => auth()->user()->id,
