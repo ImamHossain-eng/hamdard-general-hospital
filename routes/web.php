@@ -16,6 +16,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/test', [UserController::class, 'test_notification'])->middleware('auth');
+
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
 Route::post('/', [PagesController::class, 'contact'])->name('contact');
@@ -24,6 +26,7 @@ Route::get('/doctor_profile/{id}', [PagesController::class, 'doctor_profile'])->
 
 
 Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 

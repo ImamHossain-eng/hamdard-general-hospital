@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Doctor;
 
+
+
 class PagesController extends Controller
 {
+    
     public function homepage(){
         $doctors = Doctor::latest()->get();
        return view('pages.homepage', compact('doctors'));
