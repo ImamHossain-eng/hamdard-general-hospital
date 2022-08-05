@@ -102,7 +102,7 @@ input{
 }
 button{
     margin-top: 50px;
-    width: 100%;
+    width: 50%;
     background-color: #ffffff;
     color: #080710;
     padding: 15px 0;
@@ -151,7 +151,10 @@ button{
         <label for="password">Password</label>
         <input type="password" name="password" placeholder="Password" id="password">
 
-        <button type="submit">Sign In</button>
+        <button type="submit">Sign In</button> 
+        @if (Route::has('password.request'))
+            <a href="{{ route('password.request') }}">{{ __('Forgot Password?') }}</a>
+        @endif
         <div class="social">
           <div class="go"><i class="fab fa-google"></i>  Google</div>
           <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>

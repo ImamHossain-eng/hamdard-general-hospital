@@ -27,6 +27,7 @@ Route::get('/doctor_profile/{id}', [PagesController::class, 'doctor_profile'])->
 
 Auth::routes();
 
+Route::post('/custom/password-reset', [PagesController::class, 'password_update'])->name('custom.password.update');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 

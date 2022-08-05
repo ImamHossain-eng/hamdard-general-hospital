@@ -21,7 +21,7 @@
         <div class="signin-wrapper">
             <div class="form-wrapper">
                 <h6 class="mb-15">{{ __('Reset Password') }}</h6>
-                <form action="{{ route('password.update') }}" method="POST">
+                <form action="{{ route('custom.password.update') }}" method="POST">
                     @csrf
 
                     <div class="row">
@@ -36,6 +36,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <input type="hidden" value="{{$token}}">
                         <!-- end col -->
                         <div class="col-12">
                             <div class="input-style-1">
@@ -60,6 +61,8 @@
                                 @enderror
                             </div>
                         </div>
+
+
                         <!-- end col -->
                         <div class="col-xxl-6 col-lg-12 col-md-6">
                             <div class="form-check checkbox-style mb-30">

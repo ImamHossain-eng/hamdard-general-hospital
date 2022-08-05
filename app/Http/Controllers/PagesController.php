@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 use App\Models\Message;
 use App\Models\Doctor;
+use App\Models\User;
+
+use DB;
 
 
 
@@ -33,5 +37,26 @@ class PagesController extends Controller
     public function doctor_profile($id){
         $doctor = Doctor::find($id);
         return view('pages.doctor_profile', compact('doctor'));
+    }
+    public function password_update(Request $request){
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        //check password reset eligibility
+        $pass_resets = DB::table('password_resets')->where('email', $request->email);
+        if($pass_resets){
+            $user = User::where('email', $request->email)->first();
+        
+            $user->password = bcrypt($request->password);
+            $user->save();
+            $pass_resets->delete();
+
+        }
+       
+        return redirect()->route('login')->with('success', 'Password has been changed. Please Login Now.');
+
+    
     }
 }

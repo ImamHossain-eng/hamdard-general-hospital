@@ -9,7 +9,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-
+@include('inc.message')
 <div class="row g-0 auth-row">
     @yield('content')
 </div>
