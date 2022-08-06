@@ -73,6 +73,9 @@ Route::middleware('user')->prefix('user')->group(function () {
 
     Route::get('/payment', [UserController::class, 'payment_index'])->name('user.payment.index');
 
+    //e prescription
+    Route::get('/appointment/{id}/e-prescription', [UserController::class, 'appoinment_prescription'])->name('user.appoinment.prescription');
+
 });
 
 Route::prefix('doctor')->middleware('doctor')->group(function () {
@@ -137,6 +140,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::get('/appointments', [AdminController::class, 'appointments_index'])->name('admin.appointment.index');
     Route::put('/appointments/{id}', [AdminController::class, 'appointments_update_status'])->name('admin.appointment.update');
     Route::get('/appointments/{id}', [AdminController::class, 'appointments_show'])->name('admin.appointment.show');
+
+    //payment route
+    Route::get('/payments', [AdminController::class, 'payment_index'])->name('admin.payment.index');
 
 });
 

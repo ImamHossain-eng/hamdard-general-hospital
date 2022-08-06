@@ -6,7 +6,14 @@
             <h3 class="text-center">
                 Your Appointment List
             </h3>
-            <a href="{{route('user.appoinment.create')}}" title="Doctor Appointment" class="btn btn-primary">Doctor Appointment</a>
+            <div class="d-md-flex justify-content-between">
+                <a href="{{route('user.appoinment.create')}}" title="Doctor Appointment" class="btn btn-primary">Doctor Appointment</a>
+                @php($ap = Appoinment::where('user_id', auth()->user()->id)->first())
+                <a href="/user/appointment/{{$ap->id}}/e-prescription" title="Generate E-Prescription" class="btn btn-danger">Generate E-Prescription</a>
+
+
+            </div>
+            
         </div>
     </div>
     <div class="card-body">
@@ -45,6 +52,11 @@
                             <a href="{{route('user.appoinment.show', $app->id)}}" class="btn btn-primary" title="Show this Appointment Details">
                                 <i class="fa fa-eye"></i>
                             </a>
+                            @if($app->prescription != null)
+                                    <a href="/user/appointment/{{$app->id}}/e-prescription" title="E-Prescription" class="btn btn-warning">
+                                        <i class="fa fa-user-md"></i>
+                                    </a> 
+                                @endif
 
                             @if($app->payment == 0)
                                 <a href="/user/appoinment/{{$app->id}}/payment" title="Pay for this appointment" class="btn btn-success">
@@ -58,6 +70,7 @@
                                     </button>
                                 </form>
                             @endif
+                            
                         </td>
 
                     </tr>

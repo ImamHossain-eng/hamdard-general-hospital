@@ -39,6 +39,16 @@
         </a>
     </li>
 
+    <li class="nav-item @if(request()->routeIs('user.payment*')) active @endif">
+        @php($aps = Appoinment::where('user_id', auth()->user()->id)->first())
+        <a href="{{ route('user.appoinment.prescription', $aps->id) }}">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+            <span class="text">E-Prescription</span>
+        </a>
+    </li>
+
    
 
     <li class="nav-item @if(request()->routeIs('about')) active @endif">

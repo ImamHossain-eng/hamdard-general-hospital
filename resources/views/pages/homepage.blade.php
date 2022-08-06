@@ -141,8 +141,9 @@
                                     {{-- <img src="{{asset('homepage/assets/images/item-01.jpg')}}" alt=""> --}}
                                   </a>
                                   <div class="down-content">
-                                    <h4>{{Str::limit($doc->speciality, 14, $end='...')}}</h4>
                                     <h6>{{$doc->user->name}}</h6>
+                                    <h4>{{Str::limit($doc->special->speciality, 14, $end='...')}}</h4>
+                                    
                                       <hr>
                                       <h6>{{$doc->degree}}</h6>
                                   </div>

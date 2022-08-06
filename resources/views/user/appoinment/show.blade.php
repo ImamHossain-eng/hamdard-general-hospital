@@ -39,8 +39,7 @@
                 @endif
             </div>
         </div>
-        <strong>Prescription</strong>
-        {!!$app->prescription!!}  
+        <a href="/user/appointment/{{$app->id}}/e-prescription" title="E-Prescription" class="btn btn-primary">See E-Prescription of this Appointment</a> 
     </div>
     <div class="card-footer text-center">
         <strong>Prescriped at: </strong>{{$app->updated_at->format('F d, Y')}} at {{$app->updated_at->format('g:ia')}} / {{$app->updated_at->diffForHumans()}} 

@@ -114,4 +114,8 @@ class UserController extends Controller
         $payments = auth()->user()->payments;
         return view('user.payment.index', compact('payments'));
     }
+    public function appoinment_prescription($id){
+        $app = Appoinment::find($id);
+        return view('user.appoinment.prescription', compact('app'));
+    }
 }

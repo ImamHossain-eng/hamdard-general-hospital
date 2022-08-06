@@ -13,6 +13,7 @@ use App\Models\Message;
 use App\Models\Special;
 use App\Models\Doctor;
 use App\Models\Appoinment;
+use App\Models\Payment;
 
 use Carbon\Carbon;
 
@@ -174,6 +175,10 @@ class AdminController extends Controller
     public function appointments_show($id){
         $app = Appoinment::find($id);
         return view('admin.appointment.show', compact('app'));
+    }
+    public function payment_index(){
+        $payments = Payment::latest()->paginate(10);
+        return view('admin.payment.index', compact('payments'));
     }
 
 }

@@ -42,6 +42,9 @@
                             <p class="card-text text-primary">
                                 {{$doctor->special->speciality}}
                             </p>
+                            <p>
+                                Visit Charge: {{number_format($doctor->price, 2)}} /=
+                            </p>
                         </div>
                     </div>
                     <div class="card-body">
