@@ -67,6 +67,12 @@ Route::middleware('user')->prefix('user')->group(function () {
     Route::put('/appointment/{id}/treatment', [UserController::class, 'user_appointment_treatment_update'])->name('user.appoinment.treatment.update');
     Route::post('/appointment', [UserController::class, 'appointment_test'])->name('user.appoinment.test');
 
+    //Payment of appoinment
+    Route::get('/appoinment/{id}/payment', [UserController::class, 'appoinment_payment'])->name('user.appoinment.payment');
+    Route::post('/appoinment/{id}/payment', [UserController::class, 'appoinment_payment_store'])->name('user.appoinment.payment.store');
+
+    Route::get('/payment', [UserController::class, 'payment_index'])->name('user.payment.index');
+
 });
 
 Route::prefix('doctor')->middleware('doctor')->group(function () {

@@ -15,15 +15,15 @@
                 <strong>Time Slot: </strong> {{$app->schedule->start_time->format('g:ia')}} to {{$app->schedule->end_time->format('g:ia')}} <br>
                 <strong>Status: </strong> @if($app->check == true) Confirmed @else Pending @endif <br>  
                 <strong>Payment: </strong> @if($app->payment == true) Confirmed @else Pending @endif <br>  
-                @if($app->payment == true)
-                                    <form action="{{route('admin.appointment.update', $app->id)}}" method="POST" style="display:inline;">
+                @if($app->payment == true && $app->check == false)
+                        <form action="{{route('admin.appointment.update', $app->id)}}" method="POST" style="display:inline;">
                                         @csrf 
                                         @method('PUT')
                                         <button type="submit" class="btn btn-success" title="Confirm this appointment">
                                             <i class="fa fa-check"></i>
                                         </button>
-                                    </form>
-                                @endif
+                            </form>
+                    @endif
             </div>
             <div class="col-md-4">
                 <strong>Prescription</strong>

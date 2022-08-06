@@ -7,6 +7,8 @@ use App\Models\Doctor;
 use App\Models\Schedule;
 use App\Models\Appoinment;
 
+use App\Notifications\OnlinePrescription;
+
 use Image;
 
 class DoctorController extends Controller
@@ -117,7 +119,9 @@ class DoctorController extends Controller
         $this->validate($request, ['prescription' => 'required']);
         $app = Appoinment::find($id);
         $app->prescription = $request->input('prescription');
-        $app->save();
+        // $app->save();
+        $user = $app->user;
+        $user->notify(new OnlinePrescription());
         return redirect()->route('doctor.appointment.index')->with('warning', 'Updated Prescription.');
     }
     public function appointment_show($id){

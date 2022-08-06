@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Appoinment;
 use App\Models\App_test;
+use App\Models\Payment;
 
 use App\Notifications\InvoicePaid;
 
@@ -76,6 +77,41 @@ class UserController extends Controller
         $test->file = $fileName;
         $test->save();
         return redirect()->route('user.appoinment.index')->with('success', 'Successfully Uploaded Test Documents');
+    }
+    public function appoinment_payment($id){
+        $app = Appoinment::find($id);
+        return view('user.payment.create', compact('app'));
+    }
+    public function appoinment_payment_store(Request $request, $id){
+        $this->validate($request, [
+            'mobile'=>'required',
+            'transaction_id'=>'required',
+            'amount' => 'required'
+        ]);
 
+        if($request->input('method') != null){
+            $app = Appoinment::find($id);
+            if($app->payment == false){
+                $app->payment = true;
+                $app->save();
+            }
+            //make the payment
+            $payment = new Payment;
+            $payment->appoinment_id = $app->id;
+            $payment->user_id = $app->user->id;
+            $payment->mobile = $request->input('mobile');
+            $payment->transaction_id = $request->input('transaction_id');
+            $payment->amount = $request->input('amount');
+            $payment->method = $request->input('method');
+            $payment->save();
+            return redirect()->route('user.payment.index')->with('success', 'Successfully Paid.');
+
+        }else{
+            return back()->withInput()->with('error', 'Please select a payment method.');
+        }
+    }
+    public function payment_index(){
+        $payments = auth()->user()->payments;
+        return view('user.payment.index', compact('payments'));
     }
 }

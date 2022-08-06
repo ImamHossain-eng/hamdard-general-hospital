@@ -40,12 +40,16 @@
                                 Confirmed
                             @endif
                         </td>
-                        <td>@if($app->payment_id == 0) Pending @else Confirmed @endif</td>
+                        <td>@if($app->payment == 0) Pending @else Confirmed @endif</td>
                         <td>
                             <a href="{{route('user.appoinment.show', $app->id)}}" class="btn btn-primary" title="Show this Appointment Details">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            @if($app->check == 0)
+
+                            @if($app->payment == 0)
+                                <a href="/user/appoinment/{{$app->id}}/payment" title="Pay for this appointment" class="btn btn-success">
+                                    <i class="fa fa-credit-card"></i>
+                                </a>
                                 <form action="{{route('user.appoinment.destroy', $app->id)}}" method="POST" class="d-inline">
                                     @csrf 
                                     @method('DELETE')

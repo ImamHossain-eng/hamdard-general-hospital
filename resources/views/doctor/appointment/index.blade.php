@@ -21,7 +21,7 @@
                 @forelse($appointments as $key => $app)
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{$app->user->name}}</td>
+                        <td>{{$app->patient_name}}</td>
                         <td>
                             {{$app->schedule->day}}:
                             {{$app->schedule->start_time->format('g:ia')}} - 
@@ -35,15 +35,15 @@
                             @endif
                         </td>
                         <td>
+                            <a href="/doctor/appointments/{{$app->id}}" class="btn btn-primary" title="Show this Appointment Details">
+                                <i class="fa fa-eye"></i>
+                            </a> 
                             @if($app->check != false)
-                                @if($app->prescription != null)
-                                    <a href="/doctor/appointments/{{$app->id}}" class="btn btn-primary" title="Show this Appointment Details">
-                                        <i class="fa fa-eye"></i>
-                                    </a> 
-                                @else
-                                    <a href="/doctor/appointments/{{$app->id}}/edit" title="Edit this appointment" class="btn btn-success">
-                                        <i class="fa fa-check"></i>
-                                    </a> 
+                                @if($app->prescription == null)
+                                <a href="/doctor/appointments/{{$app->id}}/edit" title="Compose E-Prescription for this appointment" class="btn btn-success">
+                                    <i class="fa fa-user-md"></i>
+                                </a> 
+                                    
                                 @endif
                             @endif
                         </td>

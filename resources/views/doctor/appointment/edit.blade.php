@@ -11,6 +11,7 @@
             @csrf 
             @method('PATCH')
             <div class="form-group mb-4">
+                <label class="form-label">Compose a E-Prescription</label>
                 <textarea name="prescription" @if($app->prescription != null) disabled @endif class="form-control">
                     {{$app->prescription}}
                 </textarea>

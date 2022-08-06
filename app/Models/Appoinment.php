@@ -41,4 +41,8 @@ class Appoinment extends Model
         return $this->hasOne(App_test::class);
     }
 
+    public function payment_relation(){
+        return $this->hasOne(Payment::class);
+    }
+
 }

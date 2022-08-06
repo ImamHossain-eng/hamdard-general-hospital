@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-6">
                 @if($app->test == true)
-                    <strong>Test Documents:</strong>
+                    <strong>Test Reports:</strong>
                     <iframe src="{{asset('files/patient/test/'.$app->app_test->file)}}" class="w-100 h-40"></iframe>
                     
                 @endif

@@ -16,6 +16,7 @@
                         <th>Doctor</th>
                         <th>Schedule</th>
                         <th>Status</th>
+                        <th>Payment</th>
                         <th>Created at</th>
                         <th>Option</th>
                     </tr>
@@ -34,9 +35,16 @@
                                     Confirmed
                                 @endif
                             </td>
+                            <td>
+                                @if($app->payment == false)
+                                    Pending
+                                @else 
+                                    Confirmed
+                                @endif
+                            </td>
                             <td>{{$app->created_at->diffForHumans()}}</td>
                             <td>
-                                @if($app->check == false)
+                                @if($app->check == false && $app->payment == true)
                                     <form action="{{route('admin.appointment.update', $app->id)}}" method="POST" style="display:inline;">
                                         @csrf 
                                         @method('PUT')

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Notifications\AppoinmentPaid;
+
+
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Message;
@@ -149,13 +152,28 @@ class AdminController extends Controller
         return view('admin.appointment.index', compact('appointments'));
     }
     public function appointments_update_status($id){
+        //get the appointment
         $app = Appoinment::find($id);
-        $app->check = true;
-        $app->save();
-        return redirect()->route('admin.appointment.index')->with('warning', 'Appointment Confirmed.');
+        if($app->payment == true){
+            //Change Status
+            
+            $app->check = true;
+            $app->save();
+            //Confirm Payment 
+            $payment = $app->payment_relation;
+            $payment->status = true;
+            $payment->save();
+            //Send Notification to the user
+            $user = $app->user;
+            $user->notify(new AppoinmentPaid());
+            
+            return redirect()->route('admin.appointment.index')->with('warning', 'Appointment Confirmed.');
+        }
+        
     }
     public function appointments_show($id){
         $app = Appoinment::find($id);
         return view('admin.appointment.show', compact('app'));
     }
+
 }

@@ -30,6 +30,15 @@
         </a>
     </li>
 
+    <li class="nav-item @if(request()->routeIs('user.payment*')) active @endif">
+        <a href="{{ route('user.payment.index') }}">
+              <span class="icon">
+                <i class="fa fa-money"></i>
+              </span>
+            <span class="text">Payment</span>
+        </a>
+    </li>
+
    
 
     <li class="nav-item @if(request()->routeIs('about')) active @endif">
