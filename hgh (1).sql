@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2022 at 07:19 PM
+-- Generation Time: Aug 22, 2022 at 07:43 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -51,7 +51,8 @@ CREATE TABLE `appoinments` (
 INSERT INTO `appoinments` (`id`, `user_id`, `doctor_id`, `schedule_id`, `prescription`, `check`, `payment`, `patient_name`, `patient_age`, `patient_weight`, `test`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 12, 1, 1, NULL, 0, 0, 'Orli Sanchez', '22', '87', 0, '2022-08-05 17:22:09', '2022-08-05 16:34:27', '2022-08-05 17:22:09'),
 (2, 12, 1, 1, NULL, 0, 0, 'Anastasia Fox', '50', '86', 1, '2022-08-05 17:22:11', '2022-08-05 17:10:26', '2022-08-05 17:22:11'),
-(3, 12, 1, 1, '<p>zdvgdbv</p>', 1, 1, 'Gage Bolton', '67', '62', 1, NULL, '2022-08-05 17:22:18', '2022-08-06 14:10:41');
+(3, 12, 1, 1, '<p>zdvgdbv</p>', 1, 1, 'Gage Bolton', '67', '62', 1, NULL, '2022-08-05 17:22:18', '2022-08-06 14:10:41'),
+(4, 12, 1, 1, NULL, 0, 0, 'Freya Dennis', '21', '45', 0, NULL, '2022-08-22 16:51:52', '2022-08-22 16:52:12');
 
 -- --------------------------------------------------------
 
@@ -73,6 +74,33 @@ CREATE TABLE `app_tests` (
 
 INSERT INTO `app_tests` (`id`, `appoinment_id`, `file`, `created_at`, `updated_at`) VALUES
 (4, 3, '1659720248.pdf', '2022-08-05 17:24:08', '2022-08-05 17:24:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `beds`
+--
+
+CREATE TABLE `beds` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `room_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bed_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'bed',
+  `booked` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `beds`
+--
+
+INSERT INTO `beds` (`id`, `user_id`, `room_number`, `bed_number`, `type`, `booked`, `created_at`, `updated_at`) VALUES
+(1, 0, '110', '112', 'Bed', 1, '2022-08-22 16:41:02', '2022-08-22 16:41:02'),
+(2, 0, '110', '115', 'Bed', 0, '2022-08-22 16:41:56', '2022-08-22 16:41:56'),
+(3, 0, '120', '121', 'OT', 0, '2022-08-22 16:42:09', '2022-08-22 16:42:09'),
+(4, 0, '120', '122', 'OT', 1, '2022-08-22 16:42:19', '2022-08-22 16:42:19');
 
 -- --------------------------------------------------------
 
@@ -174,7 +202,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2022_08_05_215801_add_price_to_doctors_table', 14),
 (20, '2022_06_07_215359_create_appoinments_table', 15),
 (21, '2022_08_05_225751_create_app_tests_table', 16),
-(23, '2022_08_06_111655_create_payments_table', 17);
+(23, '2022_08_06_111655_create_payments_table', 17),
+(25, '2022_08_21_214352_create_beds_table', 18);
 
 -- --------------------------------------------------------
 
@@ -330,7 +359,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `active`, `last_login`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-08-06 23:06:17', NULL, '2022-05-23 16:42:52', '2022-08-06 17:06:17', NULL),
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$qr9mAm8LDFkLc8bdmN4XF.iYfoyehOAbzIKQsleyZAYCziSt31xBW', 1, 1, '2022-08-22 22:11:47', NULL, '2022-05-23 16:42:52', '2022-08-22 16:11:47', NULL),
 (2, 'Dr. Kazmi', 'kazmi@gmail.com', NULL, '$2y$10$DknRb4YQWk03XeeoYjbKweq5clVy8k38xzxnBI/aCVfrO2zx.YpE6', 3, 0, NULL, NULL, '2022-05-24 16:36:13', '2022-05-26 16:41:18', '1653583278.jpg'),
 (3, 'Dr. Khairul Alam', 'khairul@gmail.com', NULL, '$2y$10$yr1STqNNCYbWjnIvGuSs3.dbvyv2o.s0JBHY80lyNbFjQaR5fgACe', 3, 0, NULL, NULL, '2022-05-27 17:09:04', '2022-05-27 17:14:15', '1653671655.png'),
 (8, 'User', 'user@gmail.com', NULL, '$2y$10$pySw1ayZeN5D94bbbx8EcuwdfnEiYfhcPcVR7aNIxNY/vgHnMiy0G', 2, 0, NULL, NULL, '2022-06-07 15:42:34', '2022-06-07 15:42:34', NULL),
@@ -351,6 +380,12 @@ ALTER TABLE `appoinments`
 -- Indexes for table `app_tests`
 --
 ALTER TABLE `app_tests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `beds`
+--
+ALTER TABLE `beds`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -431,12 +466,18 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appoinments`
 --
 ALTER TABLE `appoinments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `app_tests`
 --
 ALTER TABLE `app_tests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `beds`
+--
+ALTER TABLE `beds`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
@@ -461,7 +502,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `payments`

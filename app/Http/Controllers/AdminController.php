@@ -14,6 +14,7 @@ use App\Models\Special;
 use App\Models\Doctor;
 use App\Models\Appoinment;
 use App\Models\Payment;
+use App\Models\Bed;
 
 use Carbon\Carbon;
 
@@ -179,6 +180,31 @@ class AdminController extends Controller
     public function payment_index(){
         $payments = Payment::latest()->paginate(10);
         return view('admin.payment.index', compact('payments'));
+    }
+    public function bed_index(){
+        $beds = Bed::latest()->paginate(10);
+        return view('admin.bed.index', compact('beds'));
+    }
+    public function bed_store(Request $request){
+        $this->validate($request, [
+            'room_number' => 'required',
+            'bed_number' => 'required',
+            'type' => 'required',
+        ]);
+
+        $bed = new Bed;
+
+        $bed->room_number = $request->input('room_number');
+        $bed->bed_number = $request->input('bed_number');
+        $bed->type = $request->input('type');
+        
+        $bed->save();
+
+        return redirect()->route('admin.bed.index')->with('success', 'Successfully Inserted.');
+    }
+    public function bed_destroy($id){
+        Bed::find($id)->delete();
+        return redirect()->route('admin.bed.index')->with('error', 'Successfully Removed.');
     }
 
 }

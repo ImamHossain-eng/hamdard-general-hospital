@@ -76,6 +76,9 @@ Route::middleware('user')->prefix('user')->group(function () {
     //e prescription
     Route::get('/appointment/{id}/e-prescription', [UserController::class, 'appoinment_prescription'])->name('user.appoinment.prescription');
 
+    //Bed and OT 
+    Route::get('/beds', [UserController::class, 'bed_index'])->name('user.bed.index');
+
 });
 
 Route::prefix('doctor')->middleware('doctor')->group(function () {
@@ -143,6 +146,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
 
     //payment route
     Route::get('/payments', [AdminController::class, 'payment_index'])->name('admin.payment.index');
+
+    //Beds and OT bed CRUD
+    Route::get('/beds', [AdminController::class, 'bed_index'])->name('admin.bed.index');
+    Route::view('/beds/create', 'admin.bed.create')->name('admin.bed.create');
+    Route::post('/beds', [AdminController::class, 'bed_store'])->name('admin.bed.store');
+    Route::delete('/beds/{id}', [AdminController::class, 'bed_destroy'])->name('admin.bed.destroy');
 
 });
 

@@ -231,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Special' => App\Models\Special::class,
         'Appoinment' => App\Models\Appoinment::class,
+        'Bed' => App\Models\Bed::class,
 
     ],
 

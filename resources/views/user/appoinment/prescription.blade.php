@@ -18,7 +18,7 @@
         .container{
             width: 50%;
             border: 3px solid rgba(31, 18, 43, 0.808);
-            background-color: #FFFFFF;
+            background-color: #F6F6F6;
             box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),54px 54px 28px -10px rgba(34, 33, 81, 0.15);
         }
         .prescription{
@@ -59,12 +59,12 @@
                     <strong>Date and Time: </strong> <span>{{$app->updated_at->format('F d, Y')}} at {{$app->updated_at->format('g:ia')}}</span>
                 </p>
             </div>
-            <div class="d-md-flex align-items-center justify-content-md-center">
-                <div class="img-div">
-                    <img src="{{asset('images/logo/hgh_logo.jpg')}}" class="img align-self-md-center" alt="">
+            <div class="row align-items-center justify-content-md-center">
+                <div class="col-md-4">
+                    <img src="{{asset('images/logo/hospital_logo.webp')}}" class="img align-self-md-center w-100" alt="">
                 </div>
-                <div>
-                    <h3 class="text-success text-center">Hamdard General Hospital</h3>
+                <div class="col-md-8">
+                    <h3 class="text-success text-center">Hospital Management System</h3>
                     <p class="text-dark text-center">Hamdard Nagar, Gazaria, Munshiganj - 1510</p>
                     <h3 class="text-info text-center">{{$app->doctor->user->name}}</h3>
                     <h6 class="text-center text-dark">{{$app->doctor->special->speciality}} | {{$app->doctor->degree}}</h6> 

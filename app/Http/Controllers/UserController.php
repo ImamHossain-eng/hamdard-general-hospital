@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Appoinment;
 use App\Models\App_test;
 use App\Models\Payment;
+use App\Models\Bed;
 
 use App\Notifications\InvoicePaid;
 
@@ -117,5 +118,8 @@ class UserController extends Controller
     public function appoinment_prescription($id){
         $app = Appoinment::find($id);
         return view('user.appoinment.prescription', compact('app'));
+    }
+    public function bed_index(){
+        return view('user.bed.index');
     }
 }

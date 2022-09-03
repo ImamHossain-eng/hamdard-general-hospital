@@ -95,6 +95,7 @@
                         <a class="collapse-item" href="/admin/messages">Messages/Feedback</a>
                         <a class="collapse-item" href="/admin/appointments">Appointments</a>
                         <a class="collapse-item" href="/admin/payments">Payments</a>
+                        <a class="collapse-item" href="/admin/beds">OT and BED</a>
                     </div>
                 </div>
             </li>

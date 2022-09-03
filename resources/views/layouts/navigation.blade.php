@@ -30,6 +30,15 @@
         </a>
     </li>
 
+    <li class="nav-item @if(request()->routeIs('user.bed*')) active @endif">
+        <a href="{{ route('user.bed.index') }}">
+              <span class="icon">
+                <i class="fa fa-bed"></i>
+              </span>
+            <span class="text">Bed and OT</span>
+        </a>
+    </li>
+
     <li class="nav-item @if(request()->routeIs('user.payment*')) active @endif">
         <a href="{{ route('user.payment.index') }}">
               <span class="icon">
